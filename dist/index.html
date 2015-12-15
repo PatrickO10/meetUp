@@ -1,17 +1,109 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Meet-Up Event Planner</title>
-	<link rel="stylesheet" href="css/main.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meet-Up Event Planner</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
+
 <body>
-	<header>
-		<h1>Meet-Up Event Planner</h1>
-		<h4>By Patrick</h4>
-		<p>Time to fly</p>
-	</header>
-	<script src="all.js"></script>
+    <div class="container">
+        <header class="row">
+            <div class="col-xs-7 text-center">
+                <h1>Meet-Up Event Planner</h1>
+                <h4>By Patrick</h4>
+            </div>
+            <div class="col-xs-5 text-right">
+                <button type="button" class="margin-top btn btn-primary" data-toggle="modal" data-target=".signUp">Sign Up</button>
+                <button type="button" class="margin-top btn btn-success" data-toggle="modal" data-target=".login">Login</button>
+            </div>
+        </header>
+    </div>
+
+    <!-- Login modal -->
+    <div class="modal fade login" tabindex="-1" role="dialog" aria-labelledby="loginModelLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="loginModelLabel">Login</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="row">
+                        <label for="email" class="col-xs-12 margin-top">
+                            <span class="pad-right">Enter your email</span>
+                            <input type="email" id="email" placeholder="example@krustykrab.com" required autocomplete="email">
+                        </label>
+                        <label class="col-xs-12 margin-top">
+                            <span>Enter your password</span>
+                            <input type="password" placeholder="Enter your password" required>
+                        </label>
+                        <label class="col-xs-12 margin-top">
+                            <input id="submit" type="submit" value="Login">
+                        </label>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- Sign Up Modal -->
+    <div class="modal fade signUp" tabindex="-1" role="dialog" aria-labelledby="SignUpModelLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="SignUpModelLabel">Sign Up</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="row">
+                        <label for="fname" class="col-xs-12">
+                            <span>Enter your first name</span>
+                            <input type="text" id="fname" placeholder="first name" autocomplete="given-name">
+                        </label>
+                        <label for="lname" class="col-xs-12 margin-top">
+                            <span>Enter your last name</span>
+                            <input type="text" id="lname" placeholder="last name" autocomplete="family-name">
+                        </label>
+                        <label for="email" class="col-xs-12 margin-top">
+                            <span class="pad-right">Enter your email</span>
+                            <input type="email" id="email" placeholder="example@krustykrab.com" required autocomplete="email">
+                        </label>
+                        <label class="col-xs-12 col-md-6 margin-top">
+                            <span>Enter your new password</span>
+                            <input type="password" placeholder="Enter your password" required>
+                        </label>
+                        <label class="col-xs-12 col-md-6 margin-top">
+                            <span>Repeat your password</span>
+                            <input type="password" placeholder="Repeat password" required>
+                        </label>
+                        <label class="col-xs-12 margin-top">
+                            <input id="submit" value="Sign Up" type="submit">
+                        </label>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="all.js"></script>
 </body>
+
 </html>
