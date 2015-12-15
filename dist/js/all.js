@@ -1,9 +1,11 @@
-(function () {
-	var foo = 123;
-	return foo;
-})();
+var submitSignUp = document.getElementById('submitSignUp');
+var submitLogin = document.getElementById('submitLogin');
+var logPass = document.getElementById('logPass');
+var logEmail = document.getElementById('logEmail');
 
 
-var timez = 'this is the police speaking';
-
-alert(timez);
+function didIt() {
+	var logPassInput = logPass.value,
+		logEmailInput = logEmail.value;
+	alert("CLICKED IT!\n" + logPassInput + "\n" + logEmailInput);
+}

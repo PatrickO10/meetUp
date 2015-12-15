@@ -33,16 +33,16 @@
                 </div>
                 <div class="modal-body">
                     <form class="row">
-                        <label for="email" class="col-xs-12 margin-top">
+                        <label for="logEmail" class="col-xs-12 margin-top">
                             <span class="pad-right">Enter your email</span>
-                            <input type="email" id="email" placeholder="example@krustykrab.com" required autocomplete="email">
+                            <input type="email" id="logEmail" placeholder="example@krustykrab.com" required autocomplete="email">
                         </label>
-                        <label class="col-xs-12 margin-top">
+                        <label for="logPass" class="col-xs-12 margin-top">
                             <span>Enter your password</span>
-                            <input type="password" placeholder="Enter your password" required>
+                            <input type="password" id="logPass" placeholder="Enter your password" required>
                         </label>
                         <label class="col-xs-12 margin-top">
-                            <input id="submit" type="submit" value="Login">
+                            <input id="submitLogin" type="submit" value="Login" onclick="didIt()">
                         </label>
                     </form>
                 </div>
@@ -65,45 +65,54 @@
                     <h4 class="modal-title" id="SignUpModelLabel">Sign Up</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="row">
-                        <label for="fname" class="col-xs-12">
-                            <span>Enter your first name</span>
-                            <input type="text" id="fname" placeholder="first name" autocomplete="given-name">
-                        </label>
-                        <label for="lname" class="col-xs-12 margin-top">
-                            <span>Enter your last name</span>
-                            <input type="text" id="lname" placeholder="last name" autocomplete="family-name">
-                        </label>
-                        <label for="email" class="col-xs-12 margin-top">
-                            <span class="pad-right">Enter your email</span>
-                            <input type="email" id="email" placeholder="example@krustykrab.com" required autocomplete="email">
-                        </label>
-                        <label class="col-xs-12 col-md-6 margin-top">
-                            <span>Enter your new password</span>
-                            <input type="password" placeholder="Enter your password" required>
-                        </label>
-                        <label class="col-xs-12 col-md-6 margin-top">
-                            <span>Repeat your password</span>
-                            <input type="password" placeholder="Repeat password" required>
-                        </label>
-                        <label class="col-xs-12 margin-top">
-                            <input id="submit" value="Sign Up" type="submit">
-                        </label>
-                    </form>
+                    <div class="row">
+                        <form class="col-xs-12">
+                            <label for="fname" class="col-xs-12">
+                                <span>Enter your first name</span>
+                                <input type="text" id="fname" placeholder="first name" autocomplete="given-name">
+                            </label>
+                            <label for="lname" class="col-xs-12 margin-top">
+                                <span>Enter your last name</span>
+                                <input type="text" id="lname" placeholder="last name" autocomplete="family-name">
+                            </label>
+                            <label for="email" class="col-xs-12 margin-top">
+                                <span class="pad-right">Enter your email</span>
+                                <input type="email" id="email" placeholder="example@krustykrab.com" required autocomplete="email">
+                            </label>
+                            <label class="col-xs-12 col-md-6 margin-top">
+                                <input type="password" placeholder="Enter your password" maxlength="100" minlength="8" required>
+                            </label>
+                            <label class="col-xs-12 col-md-6 margin-top">
+                                <input type="password" placeholder="Repeat password" maxlength="100" minlength="8" required>
+                            </label>
+                            <div class="col-xs-12">
+                                <p>Password should meet the following requirements:</p>
+                                <ul>
+                                    <li>8-100 characters (longer is better)</li>
+                                    <li>At least one of these symbols: !, @, #, $, %, ^, &, *</li>
+                                    <li>At least one number</li>
+                                    <li>At least one lowercase letter</li>
+                                    <li>At least one uppercase letter</li>
+                                </ul>
+                            </div>
+                            <label class="col-xs-12 margin-top">
+                                <input id="submitSignUp" value="Sign Up" type="submit" onclick="didIt()">
+                            </label>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+                <!-- /.modal-content -->
             </div>
-            <!-- /.modal-content -->
+            <!-- /.modal-dialog -->
         </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
+        <!-- /.modal -->
 
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="all.js"></script>
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="js/all.js"></script>
 </body>
 
 </html>
