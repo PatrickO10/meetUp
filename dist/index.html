@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Meet-Up Event Planner</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -12,13 +12,22 @@
 <body>
     <div class="container">
         <header class="row">
-            <div class="col-xs-7 text-center">
+            <div class="col-xs-12 text-center">
                 <h1>Meet-Up Event Planner</h1>
                 <h4>By Patrick</h4>
             </div>
-            <div class="col-xs-5 text-right">
-                <button type="button" class="margin-top btn btn-primary" data-toggle="modal" data-target=".signUp">Sign Up</button>
-                <button type="button" class="margin-top btn btn-success" data-toggle="modal" data-target=".login">Login</button>
+            <div class="col-xs-12 col-md-4">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <button type="button" class="margin-top btn btn-primary" data-toggle="modal" data-target=".signUp">Sign Up</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button type="button" class="margin-top btn btn-success" data-toggle="modal" data-target=".login">Login</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button type="button" class="margin-top pad-right btn btn-warning" data-toggle="modal" data-target=".newEvent">Create Event</button>
+                    </div>
+                </div>
             </div>
         </header>
     </div>
@@ -104,15 +113,77 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
-                <!-- /.modal-content -->
             </div>
-            <!-- /.modal-dialog -->
+            <!-- /.modal-content -->
         </div>
-        <!-- /.modal -->
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <script src="js/all.js"></script>
+    <!-- Create New Event Modal -->
+    <div class="modal fade newEvent" tabindex="-1" role="dialog" aria-labelledby="newEventModelLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="newEventModelLabel">Create a New Event</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <form class="col-xs-12">
+                            <label for="eName" class="col-xs-12 margin-top">
+                                <span>Enter Event Name</span>
+                                <input type="text" id="eName" placeholder="Ex.: Patrick's Birthday" required>
+                            </label>
+                            <label for="events" class="col-xs-12 margin-top">
+                                <span>Choose an Event</span>
+                                <input list="eventsList" id="events" placeholder="conference, movie, etc" required>
+                                <datalist id="eventsList">
+                                    <option value="Birthday Party"></option>
+                                    <option value="Conference Talk"></option>
+                                    <option value="Wedding"></option>
+                                    <option value="Date Night"></option>
+                                    <option value="Study Session"></option>
+                                    <option value="Book Club"></option>
+                                    <option value="Movie"></option>
+                                </datalist>
+                            </label>
+                            <label for="host" class="col-xs-12 margin-top">
+                                <span>Enter Event Host</span>
+                                <input id="host" type="text" placeholder="Event Host" required>
+                            </label>
+                            <label for="eventStart" class="col-xs-12 margin-top">
+                                <span>Enter Start: date and time</span>
+                                <input id="eventStart" type="datetime-local" required>
+                            </label>
+                            <label for="eventEnd" class="col-xs-12 margin-top">
+                                <span>Enter Start: date and time</span>
+                                <input id="eventEnd" type="datetime-local" required>
+                            </label>
+                            <label for="guest" class="col-xs-12 margin-top">
+                                <span>Add Guests</span>
+                                <input id="guest" class="pad-right" type="text" placeholder="Enter guest name">
+                                <input type="button" value="add" onclick="didIt()">
+                            </label>
+                            <label for="eventSubmit" class="col-xs-12 margin-top">
+                                <input id="eventSubmit" type="submit" onclick="didIt()">
+                            </label>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="js/all.js"></script>
 </body>
 
 </html>
