@@ -1,11 +1,1 @@
-var submitSignUp = document.getElementById('submitSignUp');
-var submitLogin = document.getElementById('submitLogin');
-var logPass = document.getElementById('logPass');
-var logEmail = document.getElementById('logEmail');
-
-
-function didIt() {
-	var logPassInput = logPass.value,
-		logEmailInput = logEmail.value;
-	alert("CLICKED IT!\n" + logPassInput + "\n" + logEmailInput);
-}
+function didIt(){var e=logPass.value,t=logEmail.value;alert("CLICKED IT!\n"+e+"\n"+t)}function initAutocomplete(){var e=document.getElementById("loc-input");autocomplete=new google.maps.places.Autocomplete(e)}var submitSignUp=document.getElementById("submitSignUp"),submitLogin=document.getElementById("submitLogin"),logPass=document.getElementById("logPass"),logEmail=document.getElementById("logEmail"),autocomplete;

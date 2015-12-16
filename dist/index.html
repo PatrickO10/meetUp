@@ -25,7 +25,7 @@
                         <button type="button" class="margin-top btn btn-success" data-toggle="modal" data-target=".login">Login</button>
                     </div>
                     <div class="col-xs-4">
-                        <button type="button" class="margin-top pad-right btn btn-warning" data-toggle="modal" data-target=".newEvent">Create Event</button>
+                        <button type="button" class="margin-top pad-right btn btn-warning" id="createBut" data-toggle="modal" data-target=".newEvent">Create Event</button>
                     </div>
                 </div>
             </div>
@@ -160,6 +160,10 @@
                                 <span>Enter Start: date and time</span>
                                 <input id="eventEnd" type="datetime-local" required>
                             </label>
+                            <label for="loc-input" class="controls col-xs-12 margin-top">
+                                <span>Add location</span>
+                                <input type="text" id="loc-input" placeholder="Enter a location">
+                            </label>
                             <label for="guest" class="col-xs-12 margin-top">
                                 <span>Add Guests</span>
                                 <input id="guest" class="pad-right" type="text" placeholder="Enter guest name">
@@ -182,7 +186,9 @@
     <!-- /.modal -->
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDd2ufxn83Rttg2ihshVshlH8KFPeE1UG8&signed_in=true&libraries=places&callback=initAutocomplete" async defer></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
     <script src="js/all.js"></script>
 </body>
 

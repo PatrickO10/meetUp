@@ -1,31 +1,48 @@
-html, body {
-	margin: 0;
-	padding: 0;
-	font-family: Arial;
-	background-color: #AE501D;
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+    background-color: #AE501D;
 }
 
 h1 {
-	color: red;
-	margin: 1em auto;
-	margin-bottom: 2em;
-	text-align: center;
-	font-family: 'Lobster', cursive;
-	font-size: 5em;
+    color: red;
+    margin: 1em auto;
+    margin-bottom: 2em;
+    text-align: center;
+    font-family: 'Lobster', cursive;
+    font-size: 5em;
 }
 
 .margin-top {
-	margin-top: 10%;
+    margin-top: 10%;
 }
 
 .text-right {
-	text-align: right;
+    text-align: right;
 }
 
 .text-center {
-	text-align: center;
+    text-align: center;
 }
 
 .pad-right {
-	padding-right: 2%;
+    padding-right: 2%;
+}
+
+.pac-container {
+    background-color: #FFF;
+    z-index: 1050;
+    position: fixed;
+    display: inline-block;
+    float: left;
+}
+
+.modal {
+    z-index: 20;
+}
+
+.modal-backdrop {
+    z-index: 10;
 }
