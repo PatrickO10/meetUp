@@ -1,17 +1,1 @@
-var submitSignUp = document.getElementById('submitSignUp');
-var submitLogin = document.getElementById('submitLogin');
-var logPass = document.getElementById('logPass');
-var logEmail = document.getElementById('logEmail');
-var autocomplete;
-
-function didIt() {
-    var logPassInput = logPass.value,
-        logEmailInput = logEmail.value;
-    alert("CLICKED IT!\n" + logPassInput + "\n" + logEmailInput);
-}
-
-function initAutocomplete() {
-    var input = document.getElementById('loc-input');
-    // Create the autocomplete object
-    autocomplete = new google.maps.places.Autocomplete(input);
-}
+function initAutocomplete(){var s=document.getElementById("loc-input");autocomplete=new google.maps.places.Autocomplete(s)}function trackIssues(){this.issues=[]}var submitSignUp=document.getElementById("submitSignUp"),submitLogin=document.getElementById("submitLogin"),logPass=document.getElementById("logPass"),logEmail=document.getElementById("logEmail"),firstPasswordEl=document.getElementById("fPassword"),secondPasswordEl=document.getElementById("sPassword"),autocomplete;trackIssues.prototype={addIssues:function(s){this.issues.push(s)},retrieveIssues:function(){var s="";return 1===this.issues.length?s=s="The following issue needs to be corrected:\n"+this.issues[0]:this.issues.length>1&&(s="The following issues need to be corrected:\n"+this.issues.join("\n")),s}},submitSignUp.onclick=function(){function s(){e.length<8?n.addIssues("fewer than 8 characters"):e.length>50&&n.addIssues("greater than 50 characters"),e.match(/[\!\@\#\$\%\^\&\*]/g)||n.addIssues("missing a symbol (!, @, #, $, %, ^, &, *)"),e.match(/\d/g)||n.addIssues("missing a number"),e.match(/[a-z]/g)||n.addIssues("missing a lowercase letter"),e.match(/[A-Z]/g)||n.addIssues("missing an uppercase letter");var s=e.match(/[^A-z0-9\!\@\#\$\%\^\&\*]/g);s&&s.forEach(function(s){n.addIssues("includes bad character: "+s)})}var e=firstPasswordEl.value,t=secondPasswordEl.value,n=new trackIssues,a=new trackIssues;e===t&&e.length>0?s():a.addIssues("Passwords must match!");var o=n.retrieveIssues(),i=a.retrieveIssues();firstPasswordEl.setCustomValidity(o),secondPasswordEl.setCustomValidity(i)};

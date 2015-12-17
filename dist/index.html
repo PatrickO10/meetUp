@@ -80,7 +80,7 @@
                             <input type="password" id="logPass" placeholder="Enter your password" required>
                         </label>
                         <label class="col-xs-12 margin-top">
-                            <input id="submitLogin" type="submit" value="Login" onclick="didIt()">
+                            <input id="submitLogin" type="submit" value="Login">
                         </label>
                     </form>
                 </div>
@@ -117,16 +117,16 @@
                                 <span class="pad-right">Enter your email</span>
                                 <input type="email" id="email" placeholder="example@krustykrab.com" required autocomplete="email">
                             </label>
-                            <label class="col-xs-12 col-md-6 margin-top">
-                                <input type="password" placeholder="Enter your password" maxlength="100" minlength="8" required>
+                            <label for="fPassword" class="col-xs-12 col-md-6 margin-top">
+                                <input type="password" id="fPassword" placeholder="Enter your password" maxlength="50" minlength="8" required>
                             </label>
-                            <label class="col-xs-12 col-md-6 margin-top">
-                                <input type="password" placeholder="Repeat password" maxlength="100" minlength="8" required>
+                            <label for="sPassword" class="col-xs-12 col-md-6 margin-top">
+                                <input type="password" id="sPassword" placeholder="Repeat password" maxlength="50" minlength="8" required>
                             </label>
                             <div class="col-xs-12">
                                 <p>Password should meet the following requirements:</p>
                                 <ul>
-                                    <li>8-100 characters (longer is better)</li>
+                                    <li>8-50 characters (longer is better)</li>
                                     <li>At least one of these symbols: !, @, #, $, %, ^, &, *</li>
                                     <li>At least one number</li>
                                     <li>At least one lowercase letter</li>
@@ -134,7 +134,7 @@
                                 </ul>
                             </div>
                             <label class="col-xs-12 margin-top">
-                                <input id="submitSignUp" value="Sign Up" type="submit" onclick="didIt()">
+                                <input id="submitSignUp" value="Sign Up" type="submit">
                             </label>
                         </form>
                     </div>
@@ -196,10 +196,10 @@
                             <label for="guest" class="col-xs-12 margin-top">
                                 <span>Add Guests</span>
                                 <input id="guest" class="pad-right" type="text" placeholder="Enter guest name">
-                                <input type="button" value="add" onclick="didIt()">
+                                <input type="button" value="add">
                             </label>
                             <label for="eventSubmit" class="col-xs-12 margin-top">
-                                <input id="eventSubmit" type="submit" onclick="didIt()">
+                                <input id="eventSubmit" type="submit">
                             </label>
                         </form>
                     </div>
