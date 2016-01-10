@@ -12,6 +12,7 @@ gulp.task('default', ['copy-html', 'styles', 'lint', 'scripts'], function() {
     gulp.watch('js/**/*.js', ['lint', 'scripts-dist']);
     gulp.watch('index.html', ['copy-html']);
     gulp.watch('./dist/index.html').on('change', browserSync.reload);
+    gulp.watch('./dist/css/main.css').on('change', browserSync.reload);
     browserSync.init({
         server: "./dist"
     });
