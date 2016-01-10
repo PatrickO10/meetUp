@@ -96,8 +96,8 @@ submitSignUp.onclick = function() {
 
 // Since autofocus doesn't work with bootstrap modals, I am using this code from Bootstrap JS to replace it
 // for autofocus.
-$('.signUp, .newEvent, .login').on('shown.bs.modal', function () {
-  $('#fname').focus();
-  $('#eName').focus();
-  $('#logEmail').focus();
+$('.signUp, .newEvent, .login').on('shown.bs.modal', function() {
+    $('#fname').focus();
+    $('#eName').focus();
+    $('#logEmail').focus();
 });
