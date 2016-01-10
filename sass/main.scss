@@ -13,10 +13,6 @@ body {
     color: $gold;
 }
 
-.container {
-    background-color: $scarlet;
-}
-
 .mane-bg {
     background-color: $mane;
 }
@@ -27,6 +23,19 @@ body {
 
 .midnight-bg {
     background-color: $midnight;
+}
+
+.btn-primary {
+    background-color: $gold;
+    color: $scarlet;
+    border-color: $midnight;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: $mane;
+    color: $parchment;
+    border-color: $midnight;
 }
 
 h1 {

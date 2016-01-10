@@ -3,9 +3,9 @@ var submitSignUp = document.getElementById('submitSignUp'),
     logPass = document.getElementById('logPass'),
     logEmail = document.getElementById('logEmail'),
     firstPasswordEl = document.getElementById('fPassword'),
-    secondPasswordEl = document.getElementById('sPassword');
+    secondPasswordEl = document.getElementById('sPassword'),
+    autocomplete;
 
-var autocomplete;
 function initAutocomplete() {
     var input = document.getElementById('loc-input');
     // Create the autocomplete object
@@ -26,7 +26,7 @@ trackIssues.prototype = {
     retrieveIssues: function() {
         var msg = "";
         if (this.issues.length === 1) {
-            msg = msg = "The following issue needs to be corrected:\n" + this.issues[0];
+            msg = "The following issue needs to be corrected:\n" + this.issues[0];
         } else if (this.issues.length > 1) {
             msg = "The following issues need to be corrected:\n" + this.issues.join("\n");
         }
