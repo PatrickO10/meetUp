@@ -35,8 +35,8 @@
 				<h3>{{eventObject.name}}</h3>
 				<h4>{{eventObject.eType}}</h4>
 				<p><strong>Host:</strong> {{eventObject.host}}</p>
-				<p><strong>Start:</strong> {{eventObject.start}}</p>
-				<p><strong>End:</strong> {{eventObject.end}}</p>
+				<p><strong>Start:</strong> {{eventObject.startDate}}</p>
+				<p><strong>End:</strong> {{eventObject.endDate}}</p>
 				<p><strong>Location:</strong> {{eventObject.location}}</p>
 				<p><strong>Guests:</strong> {{eventObject.guests}}</p>
 			</article>
@@ -52,7 +52,7 @@
 					<h4 class="modal-title" id="loginModelLabel">Login</h4>
 				</div>
 				<div class="modal-body mane-bg">
-					<form class="row form-horizontal" id="loginForm">
+					<form class="row form-horizontal" id="loginForm" ng-submit="ctrl.login(user)" name="logForm">
 						<label for="logEmail" class="col-xs-12 margin-top">
 							<span class="pad-right">Enter your email</span>
 							<input type="email" id="logEmail" ng-model="user.email" class="form-control" placeholder="example@krustykrab.com" required autocomplete="email">
@@ -62,12 +62,12 @@
 							<input type="password" id="logPass" ng-model="user.pass" class="form-control" placeholder="Enter your password" required>
 						</label>
 						<label class="col-xs-12 margin-top">
-							<input id="submitLogin" type="submit" value="Login" ng-click="ctrl.login(user)">
+							<input id="submitLogin" type="submit" value="Login" ng-disabled="logForm.$invalid">
 						</label>
 					</form>
 				</div>
 				<div class="modal-footer midnight-bg">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->
@@ -86,7 +86,7 @@
 				</div>
 				<div class="modal-body mane-bg">
 					<div class="row">
-						<form class="col-xs-12" id="signUpForm">
+						<form class="col-xs-12" id="signUpForm"  ng-submit="ctrl.signUp(newUser)" name="newAccount">
 							<label for="fname" class="col-xs-12">
 								<span>Enter your full name (First and Last name)</span>
 								<input type="text" id="fname" class="form-control" placeholder="full name" required autocomplete="name" ng-model="newUser.fname">
@@ -112,7 +112,7 @@
 								</ul>
 							</div>
 							<label class="col-xs-12 margin-top">
-								<input id="submitSignUp" value="Sign Up" type="submit" ng-click="ctrl.signUp(newUser)">
+								<input id="submitSignUp" value="Sign Up" type="submit" ng-disabled="newAccount.$invalid">
 							</label>
 						</form>
 					</div>
@@ -137,7 +137,7 @@
 				</div>
 				<div class="modal-body mane-bg">
 					<div class="row">
-						<form class="col-xs-12" id="newEventForm">
+						<form class="col-xs-12" id="newEventForm" ng-submit="ctrl.createEvent(newEvent)">
 							<label for="eName" class="col-xs-12 margin-top">
 								<span>Enter Event Name</span>
 								<input type="text" id="eName" class="form-control" placeholder="Ex.: Patrick's Birthday" required ng-model="newEvent.name">
@@ -173,10 +173,10 @@
 							</label>
 							<label for="guest" class="col-xs-12 margin-top">
 								<span>Add Guests</span>
-								<input id="guest" class="pad-right form-control" type="text" placeholder="Enter guest name" ng-model="newEvent.guests">
+								<input id="guest" class="pad-right form-control" type="text" placeholder="Enter guest names (Sam, Tom, Pam, etc.)" ng-model="newEvent.guests" required>
 							</label>
 							<label for="eventSubmit" class="col-xs-12 margin-top">
-								<input id="eventSubmit" type="submit" value="Create Event" ng-click="ctrl.createEvent(newEvent)">
+								<input id="eventSubmit" type="submit" value="Create Event" ng-disabled="eSub.$invalid">
 							</label>
 						</form>
 					</div>

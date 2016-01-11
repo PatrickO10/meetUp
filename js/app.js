@@ -5,13 +5,15 @@ var submitSignUp = document.getElementById('submitSignUp'),
 	firstPasswordEl = document.getElementById('fPassword'),
 	secondPasswordEl = document.getElementById('sPassword'),
 	autocomplete;
-
+/*
 function initAutocomplete() {
 	var input = document.getElementById('loc-input');
 	// Create the autocomplete object
 	autocomplete = new google.maps.places.Autocomplete(input);
-}
 
+	autocomplete.addListener('place_changed', fillInAddress);
+}
+*/
 // This will track issues.
 function TrackIssues() {
 	this.issues = [];

@@ -14,11 +14,13 @@
 			self.user = {
 				eventLoc: ''
 			};
+			self.userEvents = '';
 
 			var input = document.getElementById('loc-input');
 			// Create the autocomplete object
 			autocomplete = new google.maps.places.Autocomplete(input);
 
+			// Add listener so address changes and can be pushed to create event.
 			autocomplete.addListener('place_changed', function() {
 				var place = autocomplete.getPlace();
 				self.user.eventLoc = place.formatted_address;
@@ -30,7 +32,7 @@
 				if (self.userRef === '') {
 					console.log("Please login to continue");
 				} else {
-					self.userEvents = self.userRef.child("events");
+					//self.userEvents = self.userRef.child("events");
 					// Convert date to strings.
 					var start = self.masterEvent.startDate.toString(),
 						end = self.masterEvent.endDate.toString();
@@ -43,6 +45,7 @@
 						location: self.user.eventLoc,
 						guests: self.masterEvent.guests
 					});
+					self.newEvent = {};
 					$('#newEventForm')[0].reset();
 					$('.newEvent').modal('hide');
 				}
@@ -59,7 +62,9 @@
 						} else {
 							console.log("Authenticated successfully with payload:", authData);
 							self.userRef = ref.child("users").child(authData.uid);
-							console.log(self.userRef);
+							self.userEvents = self.userRef.child("events");
+
+							self.eventsArray = $firebaseArray(self.userEvents);
 							$('#loginForm')[0].reset();
 							$('.login').modal('hide');
 						}
