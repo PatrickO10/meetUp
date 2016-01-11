@@ -2,213 +2,209 @@
 <html lang="en" ng-app="meetupEventApp">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Meet-Up Event Planner</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/main.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Meet-Up Event Planner</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/main.css">
 </head>
 
 <body ng-controller="MeetupEventCtrl">
-    <div class="container">
-        <header class="row">
-            <div class="col-xs-12 text-center">
-                <h1>Meet-Up Event Planner</h1>
-                <h4>By Patrick</h4>
-            </div>
-            <div class="col-xs-12 col-md-4">
-                <div class="row btn-group">
-                    <div class="col-xs-4">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".signUp">Sign Up</button>
-                    </div>
-                    <div class="col-xs-4">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".login">Login</button>
-                    </div>
-                    <div class="col-xs-4">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".newEvent">Create Event</button>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <section class="row text-center margin-zero ">
-            <article class="col-xs-12 col-md-4" ng-repeat="eventObject in eventsArray">
-                <h3>{{eventObject.name}}</h3>
-                <h4>{{eventObject.eType}}</h4>
-                <p><strong>Host:</strong> {{eventObject.host}}</p>
-                <p><strong>Start:</strong> {{eventObject.start}}</p>
-                <p><strong>End:</strong> {{eventObject.end}}</p>
-                <p><strong>Location:</strong> {{eventObject.location}}</p>
-                <p><strong>Guests:</strong> {{eventObject.guests}}</p>
-            </article>
-        </section>
-    </div>
+	<div class="container">
+		<header class="row">
+			<div class="col-xs-12 text-center">
+				<h1>Meet-Up Event Planner</h1>
+				<h4>By Patrick</h4>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="row btn-group">
+					<div class="col-xs-4">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".signUp">Sign Up</button>
+					</div>
+					<div class="col-xs-4">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".login">Login</button>
+					</div>
+					<div class="col-xs-4">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".newEvent">Create Event</button>
+					</div>
+				</div>
+			</div>
+		</header>
+		<section class="row text-center margin-zero ">
+			<article class="col-xs-12 col-md-4" ng-repeat="eventObject in eventsArray">
+				<h3>{{eventObject.name}}</h3>
+				<h4>{{eventObject.eType}}</h4>
+				<p><strong>Host:</strong> {{eventObject.host}}</p>
+				<p><strong>Start:</strong> {{eventObject.start}}</p>
+				<p><strong>End:</strong> {{eventObject.end}}</p>
+				<p><strong>Location:</strong> {{eventObject.location}}</p>
+				<p><strong>Guests:</strong> {{eventObject.guests}}</p>
+			</article>
+		</section>
+	</div>
 
-    <!-- Login modal -->
-    <div class="modal fade login" tabindex="-1" role="dialog" aria-labelledby="loginModelLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header scarlet-bg">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="loginModelLabel">Login</h4>
-                </div>
-                <div class="modal-body mane-bg">
-                    <form class="row form-horizontal">
-                        <label for="logEmail" class="col-xs-12 margin-top">
-                            <span class="pad-right">Enter your email</span>
-                            <input type="email" id="logEmail" ng-model="user.email" class="form-control" placeholder="example@krustykrab.com" required autocomplete="email">
-                        </label>
-                        <label for="logPass" class="col-xs-12 margin-top">
-                            <span>Enter your password</span>
-                            <input type="password" id="logPass" ng-model="user.pass" class="form-control" placeholder="Enter your password" required>
-                        </label>
-                        <label class="col-xs-12 margin-top">
-                            <input id="submitLogin" type="submit" value="Login" ng-click="login(user)">
-                        </label>
-                    </form>
-                </div>
-                <div class="modal-footer midnight-bg">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
+	<!-- Login modal -->
+	<div class="modal fade login" tabindex="-1" role="dialog" aria-labelledby="loginModelLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header scarlet-bg">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="loginModelLabel">Login</h4>
+				</div>
+				<div class="modal-body mane-bg">
+					<form class="row form-horizontal" id="loginForm">
+						<label for="logEmail" class="col-xs-12 margin-top">
+							<span class="pad-right">Enter your email</span>
+							<input type="email" id="logEmail" ng-model="user.email" class="form-control" placeholder="example@krustykrab.com" required autocomplete="email">
+						</label>
+						<label for="logPass" class="col-xs-12 margin-top">
+							<span>Enter your password</span>
+							<input type="password" id="logPass" ng-model="user.pass" class="form-control" placeholder="Enter your password" required>
+						</label>
+						<label class="col-xs-12 margin-top">
+							<input id="submitLogin" type="submit" value="Login" ng-click="login(user)">
+						</label>
+					</form>
+				</div>
+				<div class="modal-footer midnight-bg">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
 
-    <!-- Sign Up Modal -->
-    <div class="modal fade signUp" tabindex="-1" role="dialog" aria-labelledby="SignUpModelLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header scarlet-bg">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="SignUpModelLabel">Sign Up</h4>
-                </div>
-                <div class="modal-body mane-bg">
-                    <div class="row">
-                        <form class="col-xs-12">
-                            <label for="fname" class="col-xs-12">
-                                <span>Enter your first name</span>
-                                <input type="text" id="fname" class="form-control" placeholder="first name" autocomplete="given-name">
-                            </label>
-                            <label for="lname" class="col-xs-12 margin-top">
-                                <span>Enter your last name</span>
-                                <input type="text" id="lname" class="form-control" placeholder="last name" autocomplete="family-name">
-                            </label>
-                            <label for="email" class="col-xs-12 margin-top">
-                                <span class="pad-right">Enter your email</span>
-                                <input type="email" id="email" class="form-control" placeholder="example@krustykrab.com" required autocomplete="email">
-                            </label>
-                            <label for="fPassword" class="col-xs-12 col-md-6 margin-top">
-                                <input type="password" id="fPassword" class="form-control" placeholder="Enter your password" maxlength="50" minlength="8" required>
-                            </label>
-                            <label for="sPassword" class="col-xs-12 col-md-6 margin-top">
-                                <input type="password" id="sPassword" class="form-control" placeholder="Repeat password" maxlength="50" minlength="8" required>
-                            </label>
-                            <div class="col-xs-12">
-                                <p>Password should meet the following requirements:</p>
-                                <ul>
-                                    <li>8-50 characters (longer is better)</li>
-                                    <li>At least one of these symbols: !, @, #, $, %, ^, &, *</li>
-                                    <li>At least one number</li>
-                                    <li>At least one lowercase letter</li>
-                                    <li>At least one uppercase letter</li>
-                                </ul>
-                            </div>
-                            <label class="col-xs-12 margin-top">
-                                <input id="submitSignUp" value="Sign Up" type="submit">
-                            </label>
-                        </form>
-                    </div>
-                </div>
-                <div class="modal-footer midnight-bg">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
+	<!-- Sign Up Modal -->
+	<div class="modal fade signUp" tabindex="-1" role="dialog" aria-labelledby="SignUpModelLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header scarlet-bg">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="SignUpModelLabel">Sign Up</h4>
+				</div>
+				<div class="modal-body mane-bg">
+					<div class="row">
+						<form class="col-xs-12" id="signUpForm">
+							<label for="fname" class="col-xs-12">
+								<span>Enter your full name (First and Last name)</span>
+								<input type="text" id="fname" class="form-control" placeholder="full name" required autocomplete="name" ng-model="newUser.fname">
+							</label>
+							<label for="email" class="col-xs-12 margin-top">
+								<span class="pad-right">Enter your email</span>
+								<input type="email" id="email" class="form-control" placeholder="example@krustykrab.com" required autocomplete="email" ng-model="newUser.email">
+							</label>
+							<label for="fPassword" class="col-xs-12 col-md-6 margin-top">
+								<input type="password" id="fPassword" class="form-control" placeholder="Enter your password" maxlength="50" minlength="8" required ng-model="newUser.fPassword">
+							</label>
+							<label for="sPassword" class="col-xs-12 col-md-6 margin-top">
+								<input type="password" id="sPassword" class="form-control" placeholder="Repeat password" maxlength="50" minlength="8" required ng-model="newUser.sPassword">
+							</label>
+							<div class="col-xs-12">
+								<p>Password should meet the following requirements:</p>
+								<ul>
+									<li>8-50 characters (longer is better)</li>
+									<li>At least one of these symbols: !, @, #, $, %, ^, &, *</li>
+									<li>At least one number</li>
+									<li>At least one lowercase letter</li>
+									<li>At least one uppercase letter</li>
+								</ul>
+							</div>
+							<label class="col-xs-12 margin-top">
+								<input id="submitSignUp" value="Sign Up" type="submit" ng-click="signUp(newUser)">
+							</label>
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer midnight-bg">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
 
-    <!-- Create New Event Modal -->
-    <div class="modal fade newEvent" tabindex="-1" role="dialog" aria-labelledby="newEventModelLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header scarlet-bg">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="newEventModelLabel">Create a New Event</h4>
-                </div>
-                <div class="modal-body mane-bg">
-                    <div class="row">
-                        <form class="col-xs-12">
-                            <label for="eName" class="col-xs-12 margin-top">
-                                <span>Enter Event Name</span>
-                                <input type="text" id="eName" class="form-control" placeholder="Ex.: Patrick's Birthday" required>
-                            </label>
-                            <label for="events" class="col-xs-12 margin-top">
-                                <span>Choose an Event</span>
-                                <input list="eventsList" id="events" class="form-control" placeholder="conference, movie, etc" required>
-                                <datalist id="eventsList">
-                                    <option value="Birthday Party"></option>
-                                    <option value="Conference Talk"></option>
-                                    <option value="Wedding"></option>
-                                    <option value="Date Night"></option>
-                                    <option value="Study Session"></option>
-                                    <option value="Book Club"></option>
-                                    <option value="Movie"></option>
-                                </datalist>
-                            </label>
-                            <label for="host" class="col-xs-12 margin-top">
-                                <span>Enter Event Host</span>
-                                <input id="host" type="text" class="form-control" placeholder="Event Host" required>
-                            </label>
-                            <label for="eventStart" class="col-xs-12 margin-top">
-                                <span>Enter Start: date and time</span>
-                                <input id="eventStart" type="datetime-local" required>
-                            </label>
-                            <label for="eventEnd" class="col-xs-12 margin-top">
-                                <span>Enter Start: date and time</span>
-                                <input id="eventEnd" type="datetime-local" required>
-                            </label>
-                            <label for="loc-input" class="controls col-xs-12 margin-top">
-                                <span>Add location</span>
-                                <input type="text" id="loc-input" class="form-control" placeholder="Enter a location">
-                            </label>
-                            <label for="guest" class="col-xs-12 margin-top">
-                                <span>Add Guests</span>
-                                <input id="guest" class="pad-right form-control" type="text" placeholder="Enter guest name">
-                                <input type="button" value="add">
-                            </label>
-                            <label for="eventSubmit" class="col-xs-12 margin-top">
-                                <input id="eventSubmit" type="submit">
-                            </label>
-                        </form>
-                    </div>
-                </div>
-                <div class="modal-footer midnight-bg">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
+	<!-- Create New Event Modal -->
+	<div class="modal fade newEvent" tabindex="-1" role="dialog" aria-labelledby="newEventModelLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header scarlet-bg">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="newEventModelLabel">Create a New Event</h4>
+				</div>
+				<div class="modal-body mane-bg">
+					<div class="row">
+						<form class="col-xs-12" id="newEventForm">
+							<label for="eName" class="col-xs-12 margin-top">
+								<span>Enter Event Name</span>
+								<input type="text" id="eName" class="form-control" placeholder="Ex.: Patrick's Birthday" required>
+							</label>
+							<label for="events" class="col-xs-12 margin-top">
+								<span>Choose an Event</span>
+								<input list="eventsList" id="events" class="form-control" placeholder="conference, movie, etc" required>
+								<datalist id="eventsList">
+									<option value="Birthday Party"></option>
+									<option value="Conference Talk"></option>
+									<option value="Wedding"></option>
+									<option value="Date Night"></option>
+									<option value="Study Session"></option>
+									<option value="Book Club"></option>
+									<option value="Movie"></option>
+								</datalist>
+							</label>
+							<label for="host" class="col-xs-12 margin-top">
+								<span>Enter Event Host</span>
+								<input id="host" type="text" class="form-control" placeholder="Event Host" required>
+							</label>
+							<label for="eventStart" class="col-xs-12 margin-top">
+								<span>Enter Start: date and time</span>
+								<input id="eventStart" type="datetime-local" required>
+							</label>
+							<label for="eventEnd" class="col-xs-12 margin-top">
+								<span>Enter Start: date and time</span>
+								<input id="eventEnd" type="datetime-local" required>
+							</label>
+							<label for="loc-input" class="controls col-xs-12 margin-top">
+								<span>Add location</span>
+								<input type="text" id="loc-input" class="form-control" placeholder="Enter a location">
+							</label>
+							<label for="guest" class="col-xs-12 margin-top">
+								<span>Add Guests</span>
+								<input id="guest" class="pad-right form-control" type="text" placeholder="Enter guest name">
+								<input type="button" value="add">
+							</label>
+							<label for="eventSubmit" class="col-xs-12 margin-top">
+								<input id="eventSubmit" type="submit" value="Create Event">
+							</label>
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer midnight-bg">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
 
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js" defer></script>
-    <!-- Angular -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js" defer></script>
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js" defer></script>
+	<!-- Angular -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js" defer></script>
 
-    <!-- Firebase -->
-    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js" defer></script>
+	<!-- Firebase -->
+	<script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js" defer></script>
 
-    <!-- AngularFire -->
-    <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js" defer></script>
+	<!-- AngularFire -->
+	<script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js" defer></script>
 
-    <script src="js/all.js" defer></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" defer></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDd2ufxn83Rttg2ihshVshlH8KFPeE1UG8&signed_in=true&libraries=places&callback=initAutocomplete" defer></script>
+	<script src="js/all.js" defer></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" defer></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDd2ufxn83Rttg2ihshVshlH8KFPeE1UG8&signed_in=true&libraries=places&callback=initAutocomplete" defer></script>
 
 
 

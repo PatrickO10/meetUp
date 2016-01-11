@@ -3,79 +3,78 @@ $scarlet: #B8161C;
 $mane: #E4552E;
 $parchment: #F0E9D5;
 $midnight: #262020;
-
 html,
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial;
-    background-color: $scarlet;
-    color: $gold;
+	margin: 0;
+	padding: 0;
+	font-family: Arial;
+	background-color: $scarlet;
+	color: $gold;
 }
 
 .mane-bg {
-    background-color: $mane;
+	background-color: $mane;
 }
 
 .scarlet-bg {
-    background-color: $scarlet;
+	background-color: $scarlet;
 }
 
 .midnight-bg {
-    background-color: $midnight;
+	background-color: $midnight;
 }
 
 .btn-primary {
-    background-color: $gold;
-    color: $scarlet;
-    border-color: $midnight;
+	background-color: $gold;
+	color: $scarlet;
+	border-color: $midnight;
 }
 
 .btn-primary:hover,
 .btn-primary:focus {
-    background-color: $mane;
-    color: $parchment;
-    border-color: $midnight;
+	background-color: $mane;
+	color: $parchment;
+	border-color: $midnight;
 }
 
 h1 {
-    margin: 1em auto 0;
-    text-align: center;
-    font-family: 'Lobster', cursive;
-    font-size: 5em;
+	margin: 1em auto 0;
+	text-align: center;
+	font-family: 'Lobster', cursive;
+	font-size: 5em;
 }
 
 .margin-top {
-    margin-top: 10%;
+	margin-top: 10%;
 }
 
 .pad-right {
-    padding-right: 2%;
+	padding-right: 2%;
 }
 
 .pac-container {
-    background-color: #FFF;
-    z-index: 1050;
-    position: fixed;
-    display: inline-block;
-    float: left;
+	background-color: #FFF;
+	z-index: 1050;
+	position: fixed;
+	display: inline-block;
+	float: left;
 }
 
 .modal {
-    z-index: 20;
+	z-index: 20;
 }
 
 .modal-backdrop {
-    z-index: 10;
+	z-index: 10;
 }
 
 article {
-    border: solid 2px $mane;
-    margin: 2% 0 0;
-    color: $midnight;
-    background: $parchment;
+	border: solid 2px $mane;
+	margin: 2% 0 0;
+	color: $midnight;
+	background: $parchment;
 }
 
 .margin-zero {
-    margin: 0;
+	margin: 0;
 }
