@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="css/main.css">
 </head>
 
-<body ng-controller="MeetupEventCtrl">
+<body ng-controller="MeetupEventCtrl as ctrl">
 	<div class="container">
 		<header class="row">
 			<div class="col-xs-12 text-center">
@@ -31,7 +31,7 @@
 			</div>
 		</header>
 		<section class="row text-center margin-zero ">
-			<article class="col-xs-12 col-md-4" ng-repeat="eventObject in eventsArray">
+			<article class="col-xs-12 col-md-4" ng-repeat="eventObject in ctrl.eventsArray">
 				<h3>{{eventObject.name}}</h3>
 				<h4>{{eventObject.eType}}</h4>
 				<p><strong>Host:</strong> {{eventObject.host}}</p>
@@ -62,7 +62,7 @@
 							<input type="password" id="logPass" ng-model="user.pass" class="form-control" placeholder="Enter your password" required>
 						</label>
 						<label class="col-xs-12 margin-top">
-							<input id="submitLogin" type="submit" value="Login" ng-click="login(user)">
+							<input id="submitLogin" type="submit" value="Login" ng-click="ctrl.login(user)">
 						</label>
 					</form>
 				</div>
@@ -112,7 +112,7 @@
 								</ul>
 							</div>
 							<label class="col-xs-12 margin-top">
-								<input id="submitSignUp" value="Sign Up" type="submit" ng-click="signUp(newUser)">
+								<input id="submitSignUp" value="Sign Up" type="submit" ng-click="ctrl.signUp(newUser)">
 							</label>
 						</form>
 					</div>
@@ -140,11 +140,11 @@
 						<form class="col-xs-12" id="newEventForm">
 							<label for="eName" class="col-xs-12 margin-top">
 								<span>Enter Event Name</span>
-								<input type="text" id="eName" class="form-control" placeholder="Ex.: Patrick's Birthday" required>
+								<input type="text" id="eName" class="form-control" placeholder="Ex.: Patrick's Birthday" required ng-model="newEvent.name">
 							</label>
 							<label for="events" class="col-xs-12 margin-top">
 								<span>Choose an Event</span>
-								<input list="eventsList" id="events" class="form-control" placeholder="conference, movie, etc" required>
+								<input list="eventsList" id="events" class="form-control" placeholder="conference, movie, etc" required ng-model="newEvent.type">
 								<datalist id="eventsList">
 									<option value="Birthday Party"></option>
 									<option value="Conference Talk"></option>
@@ -157,27 +157,26 @@
 							</label>
 							<label for="host" class="col-xs-12 margin-top">
 								<span>Enter Event Host</span>
-								<input id="host" type="text" class="form-control" placeholder="Event Host" required>
+								<input id="host" type="text" class="form-control" placeholder="Event Host" required ng-model="newEvent.host">
 							</label>
 							<label for="eventStart" class="col-xs-12 margin-top">
 								<span>Enter Start: date and time</span>
-								<input id="eventStart" type="datetime-local" required>
+								<input class="form-control" type="datetime-local" id="eventStart" ng-model="newEvent.startDate" required>
 							</label>
 							<label for="eventEnd" class="col-xs-12 margin-top">
 								<span>Enter Start: date and time</span>
-								<input id="eventEnd" type="datetime-local" required>
+								<input class="form-control" type="datetime-local" id="eventEnd" ng-model="newEvent.endDate" required>
 							</label>
 							<label for="loc-input" class="controls col-xs-12 margin-top">
 								<span>Add location</span>
-								<input type="text" id="loc-input" class="form-control" placeholder="Enter a location">
+								<input type="text" id="loc-input" class="form-control ng-pristine ng-valid" placeholder="Enter a location" ng-model="user.eventLoc" required>
 							</label>
 							<label for="guest" class="col-xs-12 margin-top">
 								<span>Add Guests</span>
-								<input id="guest" class="pad-right form-control" type="text" placeholder="Enter guest name">
-								<input type="button" value="add">
+								<input id="guest" class="pad-right form-control" type="text" placeholder="Enter guest name" ng-model="newEvent.guests">
 							</label>
 							<label for="eventSubmit" class="col-xs-12 margin-top">
-								<input id="eventSubmit" type="submit" value="Create Event">
+								<input id="eventSubmit" type="submit" value="Create Event" ng-click="ctrl.createEvent(newEvent)">
 							</label>
 						</form>
 					</div>
@@ -201,12 +200,9 @@
 
 	<!-- AngularFire -->
 	<script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js" defer></script>
-
-	<script src="js/all.js" defer></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" defer></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDd2ufxn83Rttg2ihshVshlH8KFPeE1UG8&signed_in=true&libraries=places&callback=initAutocomplete" defer></script>
-
-
+	<script src="js/all.js" defer></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDd2ufxn83Rttg2ihshVshlH8KFPeE1UG8&signed_in=true&libraries=places" defer></script>
 
 </body>
 
