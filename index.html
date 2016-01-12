@@ -16,7 +16,7 @@
 				<h1>Meet-Up Event Planner</h1>
 				<h4>By Patrick</h4>
 			</div>
-			<div class="col-xs-12 col-md-4">
+			<div class="col-xs-12 col-md-3">
 				<div class="row btn-group">
 					<div class="col-xs-4">
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".signUp">Sign Up</button>
@@ -30,13 +30,13 @@
 				</div>
 			</div>
 		</header>
-		<section class="row text-center margin-zero ">
+		<section class="row text-center events-section">
 			<article class="col-xs-12 col-md-4" ng-repeat="eventObject in ctrl.eventsArray">
 				<h3>{{eventObject.name}}</h3>
 				<h4>{{eventObject.eType}}</h4>
 				<p><strong>Host:</strong> {{eventObject.host}}</p>
-				<p><strong>Start:</strong> {{eventObject.startDate}}</p>
-				<p><strong>End:</strong> {{eventObject.endDate}}</p>
+				<p><strong>Start:</strong> {{eventObject.startDate | date:'medium'}}</p>
+				<p><strong>End:</strong> {{eventObject.endDate | date:'medium'}}</p>
 				<p><strong>Location:</strong> {{eventObject.location}}</p>
 				<p><strong>Guests:</strong> {{eventObject.guests}}</p>
 			</article>

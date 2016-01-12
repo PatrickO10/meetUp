@@ -15,6 +15,7 @@
 				eventLoc: ''
 			};
 			self.userEvents = '';
+			self.userNew = false;
 
 			var input = document.getElementById('loc-input');
 			// Create the autocomplete object
@@ -34,14 +35,12 @@
 				} else {
 					//self.userEvents = self.userRef.child("events");
 					// Convert date to strings.
-					var start = self.masterEvent.startDate.toString(),
-						end = self.masterEvent.endDate.toString();
 					self.userEvents.push({
 						name: self.masterEvent.name,
 						type: self.masterEvent.type,
 						host: self.masterEvent.host,
-						startDate: start,
-						endDate: end,
+						startDate: self.masterEvent.startDate.getTime(),
+						endDate: self.masterEvent.endDate.getTime(),
 						location: self.user.eventLoc,
 						guests: self.masterEvent.guests
 					});
@@ -52,6 +51,7 @@
 			};
 			self.login = function(user) {
 				self.master = angular.copy(user);
+				self.userNew = false;
 				if (self.master.email && self.master.pass) {
 					ref.authWithPassword({
 						email: self.master.email,
@@ -63,7 +63,6 @@
 							console.log("Authenticated successfully with payload:", authData);
 							self.userRef = ref.child("users").child(authData.uid);
 							self.userEvents = self.userRef.child("events");
-
 							self.eventsArray = $firebaseArray(self.userEvents);
 							$('#loginForm')[0].reset();
 							$('.login').modal('hide');
@@ -73,22 +72,7 @@
 			};
 			self.signUp = function(newUser) {
 				self.masterUser = angular.copy(newUser);
-				// Create a callback to handle the result of the authentication
-				function authHandler(error, authData) {
-					if (error) {
-						console.log("Login Failed!", error);
-					} else {
-						console.log("Authenticated successfully with payload:", authData);
-						// save the user's profile into the database so we can list users,
-						// use them in Security and Firebase Rules, and show events
-						self.userRef = ref.child("users").child(authData.uid);
-						self.userRef.set({
-							provider: authData.provider,
-							name: self.masterUser.fname
-						});
-
-					}
-				}
+				self.userNew = true;
 
 				/*
 				 * Make an issue tracker for each password input to have two separate issue trackers.
@@ -156,7 +140,23 @@
 							ref.authWithPassword({
 								email: self.masterUser.email,
 								password: self.masterUser.fPassword
-							}, authHandler);
+							}, function(error, authData) {
+								if (error) {
+									console.log("Login Failed!", error);
+								} else {
+									console.log("Authenticated successfully with payload:", authData);
+									self.userRef = ref.child("users").child(authData.uid);
+									self.userRef.set({
+										provider: authData.provider,
+										name: self.masterUser.fname,
+										email: self.masterUser.email
+									});
+									self.userEvents = self.userRef.child("events");
+									self.eventsArray = $firebaseArray(self.userEvents);
+								}
+							});
+							// save the user's profile into the database so we can list users,
+							// use them in Security and Firebase Rules, and show events
 							$('#signUpForm')[0].reset();
 							$('.signUp').modal('hide');
 						}

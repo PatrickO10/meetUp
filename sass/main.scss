@@ -3,15 +3,21 @@ $scarlet: #B8161C;
 $mane: #E4552E;
 $parchment: #F0E9D5;
 $midnight: #262020;
+$maroon: #800000;
+
+
 html,
 body {
 	margin: 0;
 	padding: 0;
 	font-family: Arial;
-	background-color: $scarlet;
+	background-color: $midnight;
 	color: $gold;
 }
 
+header {
+	background: $scarlet;
+}
 .mane-bg {
 	background-color: $mane;
 }
@@ -22,6 +28,14 @@ body {
 
 .midnight-bg {
 	background-color: $midnight;
+}
+
+.maroon-bg {
+	background-color: $maroon;
+}
+
+.btn-group {
+	margin: 0 0 1em 0;
 }
 
 .btn-primary {
@@ -69,12 +83,17 @@ h1 {
 }
 
 article {
-	border: solid 2px $mane;
-	margin: 2% 0 0;
+	border: solid 5px $gold;
+	margin: 1em 0 0;
 	color: $midnight;
 	background: $parchment;
 }
 
 .margin-zero {
 	margin: 0;
+}
+
+.events-section {
+	background-color: $mane;
+	padding: 0 2em;
 }
