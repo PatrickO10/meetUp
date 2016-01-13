@@ -2,11 +2,10 @@
 	"use strict";
 	var meetupEventApp = angular.module('meetupEventApp', ['firebase']);
 
-	meetupEventApp.controller('MeetupEventCtrl', ['$firebaseArray',
-		function($firebaseArray) {
+	meetupEventApp.controller('MeetupEventCtrl', ['$scope', '$firebaseArray',
+		function($scope, $firebaseArray) {
 			var ref = new Firebase("https://vivid-torch-762.firebaseio.com/");
 			var self = this;
-			//self.eventsArray = $firebaseArray(ref);
 			self.master = {};
 			self.masterUser = {};
 			self.masterEvent = {};
@@ -15,8 +14,6 @@
 				eventLoc: ''
 			};
 			self.userEvents = '';
-			self.userNew = false;
-
 			var input = document.getElementById('loc-input');
 			// Create the autocomplete object
 			autocomplete = new google.maps.places.Autocomplete(input);
@@ -33,7 +30,6 @@
 				if (self.userRef === '') {
 					console.log("Please login to continue");
 				} else {
-					//self.userEvents = self.userRef.child("events");
 					// Convert date to strings.
 					self.userEvents.push({
 						name: self.masterEvent.name,
@@ -51,16 +47,27 @@
 			};
 			self.login = function(user) {
 				self.master = angular.copy(user);
-				self.userNew = false;
 				if (self.master.email && self.master.pass) {
 					ref.authWithPassword({
 						email: self.master.email,
 						password: self.master.pass
 					}, function(error, authData) {
 						if (error) {
-							console.log("Login Failed!", error);
+							self.loginError = true;
+							switch (error.code) {
+								case "INVALID_PASSWORD":
+									self.loginErrMsg = "Error: The specified password is incorrect.";
+									break;
+								case "INVALID_USER":
+									self.loginErrMsg = "Error: The specified user does not exist.";
+									break;
+								default:
+									self.loginErrMsg = error.code;
+							}
+							$scope.$apply();
 						} else {
 							console.log("Authenticated successfully with payload:", authData);
+							self.loginError = false;
 							self.userRef = ref.child("users").child(authData.uid);
 							self.userEvents = self.userRef.child("events");
 							self.eventsArray = $firebaseArray(self.userEvents);
@@ -72,7 +79,6 @@
 			};
 			self.signUp = function(newUser) {
 				self.masterUser = angular.copy(newUser);
-				self.userNew = true;
 
 				/*
 				 * Make an issue tracker for each password input to have two separate issue trackers.

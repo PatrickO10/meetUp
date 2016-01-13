@@ -62,8 +62,11 @@
 							<input type="password" id="logPass" ng-model="user.pass" class="form-control" placeholder="Enter your password" required>
 						</label>
 						<label class="col-xs-12 margin-top">
-							<input id="submitLogin" type="submit" value="Login" ng-disabled="logForm.$invalid">
+							<input id="submitLogin" type="submit" value="Login" ng-disabled="logForm.$invalid.$setValidity">
 						</label>
+						<div class="col-xs-12 margin-top" ng-show="ctrl.loginError">
+							<p class="invalidPass">Login Fail! {{ctrl.loginErrMsg}}</p>
+						</div>
 					</form>
 				</div>
 				<div class="modal-footer midnight-bg">
@@ -86,7 +89,7 @@
 				</div>
 				<div class="modal-body mane-bg">
 					<div class="row">
-						<form class="col-xs-12" id="signUpForm"  ng-submit="ctrl.signUp(newUser)" name="newAccount">
+						<form class="col-xs-12" id="signUpForm" ng-submit="ctrl.signUp(newUser)" name="newAccount">
 							<label for="fname" class="col-xs-12">
 								<span>Enter your full name (First and Last name)</span>
 								<input type="text" id="fname" class="form-control" placeholder="full name" required autocomplete="name" ng-model="newUser.fname">
@@ -112,7 +115,7 @@
 								</ul>
 							</div>
 							<label class="col-xs-12 margin-top">
-								<input id="submitSignUp" value="Sign Up" type="submit" ng-disabled="newAccount.$invalid">
+								<input id="submitSignUp" value="Sign Up" type="submit" ng-disabled="newAccount.$invalid.$setValidity">
 							</label>
 						</form>
 					</div>
@@ -176,7 +179,7 @@
 								<input id="guest" class="pad-right form-control" type="text" placeholder="Enter guest names (Sam, Tom, Pam, etc.)" ng-model="newEvent.guests" required>
 							</label>
 							<label for="eventSubmit" class="col-xs-12 margin-top">
-								<input id="eventSubmit" type="submit" value="Create Event" ng-disabled="eSub.$invalid">
+								<input id="eventSubmit" type="submit" value="Create Event" ng-disabled="eSub.$invalid.$setValidity">
 							</label>
 						</form>
 					</div>
