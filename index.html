@@ -61,12 +61,12 @@
 							<span>Enter your password</span>
 							<input type="password" id="logPass" ng-model="user.pass" class="form-control" placeholder="Enter your password" required>
 						</label>
-						<label class="col-xs-12 margin-top">
-							<input id="submitLogin" type="submit" value="Login" ng-disabled="logForm.$invalid.$setValidity">
-						</label>
 						<div class="col-xs-12 margin-top" ng-show="ctrl.loginError">
 							<p class="invalidPass">Login Fail! {{ctrl.loginErrMsg}}</p>
 						</div>
+						<label class="col-xs-12 margin-top">
+							<input id="submitLogin" type="submit" value="Login" ng-disabled="logForm.$invalid.$setValidity">
+						</label>
 					</form>
 				</div>
 				<div class="modal-footer midnight-bg">
@@ -178,6 +178,9 @@
 								<span>Add Guests</span>
 								<input id="guest" class="pad-right form-control" type="text" placeholder="Enter guest names (Sam, Tom, Pam, etc.)" ng-model="newEvent.guests" required>
 							</label>
+							<div class="col-xs-12 margin-top" ng-show="ctrl.loginFirst">
+								<p class="invalidPass">You have to login before you can create an event!</p>
+							</div>
 							<label for="eventSubmit" class="col-xs-12 margin-top">
 								<input id="eventSubmit" type="submit" value="Create Event" ng-disabled="eSub.$invalid.$setValidity">
 							</label>

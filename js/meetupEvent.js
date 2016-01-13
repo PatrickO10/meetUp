@@ -29,7 +29,9 @@
 				self.masterEvent = angular.copy(newEvent);
 				if (self.userRef === '') {
 					console.log("Please login to continue");
+					self.loginFirst = true;
 				} else {
+					self.loginFirst = false;
 					// Convert date to strings.
 					self.userEvents.push({
 						name: self.masterEvent.name,
