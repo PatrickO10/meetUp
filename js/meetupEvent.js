@@ -23,6 +23,7 @@
 				var place = autocomplete.getPlace();
 				self.user.eventLoc = place.formatted_address;
 			});
+			$scope.loggedStatus = false;
 
 			// create a new event and store it in user's profile.
 			self.createEvent = function(newEvent) {

@@ -18,13 +18,13 @@
 			</div>
 			<div class="col-xs-12 col-md-3">
 				<div class="row btn-group">
-					<div class="col-xs-4">
+					<div class="col-xs-4" ng-hide="ctrl.loggedStatus">
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".signUp">Sign Up</button>
 					</div>
-					<div class="col-xs-4">
+					<div class="col-xs-4" ng-hide="ctrl.loggedStatus">
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".login">Login</button>
 					</div>
-					<div class="col-xs-4">
+					<div class="col-xs-4" ng-show="ctrl.loggedStatus">
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".newEvent">Create Event</button>
 					</div>
 				</div>
