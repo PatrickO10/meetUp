@@ -23,7 +23,7 @@
 				var place = autocomplete.getPlace();
 				self.user.eventLoc = place.formatted_address;
 			});
-			$scope.loggedStatus = false;
+			self.loggedStatus = false;
 
 			// create a new event and store it in user's profile.
 			self.createEvent = function(newEvent) {
@@ -71,6 +71,7 @@
 						} else {
 							console.log("Authenticated successfully with payload:", authData);
 							self.loginError = false;
+							self.loggedStatus = true;
 							self.userRef = ref.child("users").child(authData.uid);
 							self.userEvents = self.userRef.child("events");
 							self.eventsArray = $firebaseArray(self.userEvents);
@@ -154,6 +155,7 @@
 									console.log("Login Failed!", error);
 								} else {
 									console.log("Authenticated successfully with payload:", authData);
+									self.loggedStatus = true;
 									self.userRef = ref.child("users").child(authData.uid);
 									self.userRef.set({
 										provider: authData.provider,
