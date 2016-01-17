@@ -38,8 +38,7 @@ gulp.task('scripts-dist', function() {
 	gulp.src('js/**/*.js')
 		.pipe(concat('all.js'))
 		.pipe(uglify())
-		.pipe(gulp.dest('dist/js'))
-		.pipe(gulp.dest('js'));
+		.pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('copy-html', function() {

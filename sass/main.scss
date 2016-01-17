@@ -4,8 +4,6 @@ $mane: #E4552E;
 $parchment: #F0E9D5;
 $midnight: #262020;
 $maroon: #800000;
-
-
 html,
 body {
 	margin: 0;
@@ -18,6 +16,13 @@ body {
 header {
 	background: $scarlet;
 }
+
+.optional {
+	background: #337AB7;
+	color: #fff;
+	font-size: 1.3em;
+}
+
 .mane-bg {
 	background-color: $mane;
 }
@@ -103,4 +108,13 @@ article {
 	font-size: 2em;
 	color: #fff;
 	text-align: center;
+}
+
+.my-form {
+	transition: all linear 0.5s;
+	background: transparent;
+}
+
+.my-form.ng-invalid {
+	background: red;
 }

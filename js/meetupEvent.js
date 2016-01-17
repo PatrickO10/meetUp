@@ -41,7 +41,8 @@
 						startDate: self.masterEvent.startDate.getTime(),
 						endDate: self.masterEvent.endDate.getTime(),
 						location: self.user.eventLoc,
-						guests: self.masterEvent.guests
+						guests: self.masterEvent.guests,
+						msg: self.masterEvent.msg || ''
 					});
 					self.newEvent = {};
 					$('#newEventForm')[0].reset();
@@ -69,7 +70,6 @@
 							}
 							$scope.$apply();
 						} else {
-							console.log("Authenticated successfully with payload:", authData);
 							self.loginError = false;
 							self.loggedStatus = true;
 							self.userRef = ref.child("users").child(authData.uid);
@@ -160,7 +160,8 @@
 									self.userRef.set({
 										provider: authData.provider,
 										name: self.masterUser.fname,
-										email: self.masterUser.email
+										email: self.masterUser.email,
+										gender: self.masterUser.gender || ''
 									});
 									self.userEvents = self.userRef.child("events");
 									self.eventsArray = $firebaseArray(self.userEvents);

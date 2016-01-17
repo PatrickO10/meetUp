@@ -39,6 +39,7 @@
 				<p><strong>End:</strong> {{eventObject.endDate | date:'medium'}}</p>
 				<p><strong>Location:</strong> {{eventObject.location}}</p>
 				<p><strong>Guests:</strong> {{eventObject.guests}}</p>
+				<p ng-show="eventObject.msg"><strong>Message:</strong> {{eventObject.msg}}</p>
 			</article>
 		</section>
 	</div>
@@ -55,7 +56,7 @@
 					<form class="row form-horizontal" id="loginForm" ng-submit="ctrl.login(user)" name="logForm">
 						<label for="logEmail" class="col-xs-12 margin-top">
 							<span class="pad-right">Enter your email</span>
-							<input type="email" id="logEmail" ng-model="user.email" class="form-control" placeholder="example@krustykrab.com" required autocomplete="email">
+							<input type="email" id="logEmail" ng-model="user.email" class="form-control" placeholder="example@krustykrab.com" required autocomplete="email" autofocus>
 						</label>
 						<label for="logPass" class="col-xs-12 margin-top">
 							<span>Enter your password</span>
@@ -92,16 +93,18 @@
 						<form class="col-xs-12" id="signUpForm" ng-submit="ctrl.signUp(newUser)" name="newAccount">
 							<label for="fname" class="col-xs-12">
 								<span>Enter your full name (First and Last name)</span>
-								<input type="text" id="fname" class="form-control" placeholder="full name" required autocomplete="name" ng-model="newUser.fname">
+								<input type="text" id="fname" class="form-control" placeholder="full name" required autocomplete="name" ng-model="newUser.fname" autofocus>
 							</label>
 							<label for="email" class="col-xs-12 margin-top">
 								<span class="pad-right">Enter your email</span>
 								<input type="email" id="email" class="form-control" placeholder="example@krustykrab.com" required autocomplete="email" ng-model="newUser.email">
 							</label>
 							<label for="fPassword" class="col-xs-12 col-md-6 margin-top">
+								<span>Create a password</span>
 								<input type="password" id="fPassword" class="form-control" placeholder="Enter your password" maxlength="50" minlength="8" required ng-model="newUser.fPassword">
 							</label>
 							<label for="sPassword" class="col-xs-12 col-md-6 margin-top">
+								<span>Type password again</span>
 								<input type="password" id="sPassword" class="form-control" placeholder="Repeat password" maxlength="50" minlength="8" required ng-model="newUser.sPassword">
 							</label>
 							<div class="col-xs-12">
@@ -114,6 +117,11 @@
 									<li>At least one uppercase letter</li>
 								</ul>
 							</div>
+							<label for="gender" class="col-xs-12 col-md-6 margin-top">
+								<p><span class="optional">(Optional)</span>Select Gender</p>
+								<input type="radio" id="gender" name="gender" ng-model="newUser.gender" value="male">Male
+								<input type="radio" id="gender" name="gender" ng-model="newUser.gender" value="female">Female
+							</label>
 							<label class="col-xs-12 margin-top">
 								<input id="submitSignUp" value="Sign Up" type="submit" ng-disabled="newAccount.$invalid.$setValidity">
 							</label>
@@ -143,13 +151,14 @@
 						<form class="col-xs-12" id="newEventForm" ng-submit="ctrl.createEvent(newEvent)">
 							<label for="eName" class="col-xs-12 margin-top">
 								<span>Enter Event Name</span>
-								<input type="text" id="eName" class="form-control" placeholder="Ex.: Patrick's Birthday" required ng-model="newEvent.name">
+								<input type="text" id="eName" class="form-control" placeholder="Ex.: Patrick's Birthday" required ng-model="newEvent.name" autofocus>
 							</label>
 							<label for="events" class="col-xs-12 margin-top">
 								<span>Choose an Event</span>
 								<input list="eventsList" id="events" class="form-control" placeholder="conference, movie, etc" required ng-model="newEvent.type">
 								<datalist id="eventsList">
 									<option value="Birthday Party"></option>
+									<option value="Party"></option>
 									<option value="Conference Talk"></option>
 									<option value="Wedding"></option>
 									<option value="Date Night"></option>
@@ -177,6 +186,10 @@
 							<label for="guest" class="col-xs-12 margin-top">
 								<span>Add Guests</span>
 								<input id="guest" class="pad-right form-control" type="text" placeholder="Enter guest names (Sam, Tom, Pam, etc.)" ng-model="newEvent.guests" required>
+							</label>
+							<label for="msg" class="col-xs-12 margin-top">
+								<p><span class="optional">(Optional)</span> Add a message for guests</p>
+								<textarea class="form-control" ng-model="newEvent.msg"></textarea>
 							</label>
 							<div class="col-xs-12 margin-top" ng-show="ctrl.loginFirst">
 								<p class="invalidPass">You have to login before you can create an event!</p>
