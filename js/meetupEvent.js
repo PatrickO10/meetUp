@@ -161,7 +161,8 @@
 										provider: authData.provider,
 										name: self.masterUser.fname,
 										email: self.masterUser.email,
-										gender: self.masterUser.gender || ''
+										gender: self.masterUser.gender || '',
+										birthday: self.masterUser.birthday || ''
 									});
 									self.userEvents = self.userRef.child("events");
 									self.eventsArray = $firebaseArray(self.userEvents);

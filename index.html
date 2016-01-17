@@ -30,7 +30,7 @@
 				</div>
 			</div>
 		</header>
-		<section class="row text-center events-section">
+		<section class="row text-center events-section ng-cloak">
 			<article class="col-xs-12 col-md-4" ng-repeat="eventObject in ctrl.eventsArray">
 				<h3>{{eventObject.name}}</h3>
 				<h4>{{eventObject.eType}}</h4>
@@ -97,7 +97,7 @@
 							</label>
 							<label for="email" class="col-xs-12 margin-top">
 								<span class="pad-right">Enter your email</span>
-								<input type="email" id="email" class="form-control" placeholder="example@krustykrab.com" required autocomplete="email" ng-model="newUser.email">
+								<input type="email" id="email" class="form-control" placeholder="example@krustykrab.com" required autocomplete="email" ng-model="newUser.email" ng-blur="checkValidity()">
 							</label>
 							<label for="fPassword" class="col-xs-12 col-md-6 margin-top">
 								<span>Create a password</span>
@@ -117,11 +117,23 @@
 									<li>At least one uppercase letter</li>
 								</ul>
 							</div>
-							<label for="gender" class="col-xs-12 col-md-6 margin-top">
-								<p><span class="optional">(Optional)</span>Select Gender</p>
-								<input type="radio" id="gender" name="gender" ng-model="newUser.gender" value="male">Male
-								<input type="radio" id="gender" name="gender" ng-model="newUser.gender" value="female">Female
-							</label>
+							<span class="optional">(Optional Information) Gender, Birthday</span>
+							<div class="col-xs-12 margin-top">
+								<span>Select Gender</span>
+								<label for="male">
+									<input type="radio" id="male" name="male" ng-model="newUser.gender" value="male">Male
+								</label>
+								<label for="female">
+									<input type="radio" id="female" name="female" ng-model="newUser.gender" value="female">Female
+								</label>
+							</div>
+							<div class="col-xs-12 margin-top">
+								<span>Add Birthday</span>
+								<label for="bday">
+									<input class="form-control" type="date" name="bday" ng-model="newUser.birthday" placeholder="yyyy-mm-dd">
+								</label>
+							</div>
+
 							<label class="col-xs-12 margin-top">
 								<input id="submitSignUp" value="Sign Up" type="submit" ng-disabled="newAccount.$invalid.$setValidity">
 							</label>
