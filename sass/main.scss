@@ -96,13 +96,6 @@ h1 {
 	z-index: 10;
 }
 
-article {
-	border: solid 5px $gold;
-	margin: 1em 0 0;
-	color: $midnight;
-	background: $parchment;
-}
-
 .margin-zero {
 	margin: 0;
 }
@@ -110,6 +103,14 @@ article {
 .events-section {
 	background-color: $mane;
 	padding: 0 2em;
+}
+
+.eventCard {
+	margin: 10px 10px 0 0;
+	max-width: calc((100% - 30px)/ 3);
+	border: solid 5px $parchment;
+	color: $midnight;
+	background: $gold;
 }
 
 .invalidPass {
