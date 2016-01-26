@@ -8,9 +8,7 @@
 	LoginCtrl.$inject = ['$scope', '$rootScope', 'authService'];
 
 	function LoginCtrl($scope, $rootScope, authService) {
-		var ref = new Firebase("https://vivid-torch-762.firebaseio.com/");
 		var self = this;
-		self.userRef = '';
 		self.masterUser = {};
 		$scope.loginError = false;
 		$scope.loginErrMsg = '';
@@ -20,11 +18,11 @@
 			self.masterUser = angular.copy(user);
 			console.log(self.masterUser);
 			authService.loginWithPwd(self.masterUser).then(function(authData) {
-				console.log(authData);
+				$scope.loginError = false;
+				$scope.loginErrMsg = '';
 				$('#loginForm')[0].reset();
 				$('.login').modal('hide');
 			}, function(error) {
-				console.log("Failure");
 				$scope.loginError = true;
 				switch (error.code) {
 					case "EMAIL_TAKEN":

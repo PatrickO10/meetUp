@@ -2,13 +2,18 @@
 	'use strict';
 
 	angular
-		.module('app', ['app.dashboard', 'app.login', 'app.fbAuth'])
+		.module('app', ['app.dashboard', 'app.login', 'app.fbAuth', 'app.event'])
 		.constant('FBURL', 'https://vivid-torch-762.firebaseio.com/');
 })();
 (function(){
 	'use strict';
 
 	angular.module('app.dashboard', ['firebase']);
+})();
+(function(){
+	'use strict';
+
+	angular.module('app.event', []);
 })();
 (function(){
 	'use strict';
@@ -56,6 +61,18 @@
 	}
 })();
 
+(function(){
+	'use strict';
+
+	angular
+		.module('app.event')
+		.controller('EventCtrl', EventCtrl);
+
+	function EventCtrl() {
+		var self = this;
+		console.log("Event up and running");
+	}
+})();
 (function() {
 	'use strict';
 

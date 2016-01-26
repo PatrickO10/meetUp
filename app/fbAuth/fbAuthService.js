@@ -11,8 +11,7 @@
 		var ref = new Firebase(FBURL);
 		var services = {
 			saveNewUser: saveNewUser,
-			user: user,
-			isLoggedIn: isLoggedIn,
+			getUserAuth: getUserAuth,
 			createUser: createUser,
 			loginWithPwd: loginWithPwd,
 			setEventRef: setEventRef,
@@ -25,12 +24,8 @@
 			ref.child('users').child(userObj.id).set(userObj);
 		}
 
-		function user() {
-			ref.getAuth();
-		}
-
-		function isLoggedIn() {
-			return !!ref.getAuth();
+		function getUserAuth() {
+			return ref.getAuth();
 		}
 
 		function loginWithPwd(userObj, cb) {
@@ -67,7 +62,7 @@
 			ref.onAuth(authDataCallback);
 		}
 
-		function logOutUser(){
+		function logOutUser() {
 			ref.unauth();
 		}
 
