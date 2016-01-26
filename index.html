@@ -16,16 +16,20 @@
 				<h1>Meet-Up Event Planner</h1>
 				<h4>By Patrick</h4>
 			</div>
-			<div class="col-xs-12 col-md-3">
-				<div class="row btn-group">
-					<div class="col-xs-4" ng-hide="ctrl.loggedStatus">
+			<div class="col-xs-12">
+				<div class="row ">
+					<div class="col-xs-4 btn-group" ng-hide="ctrl.loggedStatus">
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".signUp">Sign Up</button>
-					</div>
-					<div class="col-xs-4" ng-hide="ctrl.loggedStatus">
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".login">Login</button>
 					</div>
-					<div class="col-xs-4" ng-show="ctrl.loggedStatus">
+					<div class="col-xs-4" ng-hide="ctrl.loggedStatus">
+
+					</div>
+					<div class="col-xs-6" ng-show="ctrl.loggedStatus">
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".newEvent">Create Event</button>
+					</div>
+					<div class="col-xs-6" ng-show="ctrl.loggedStatus">
+						<button type="button" class="btn btn-primary pull-right" ng-click="ctrl.logOut()">Sign Out</button>
 					</div>
 				</div>
 			</div>
@@ -60,7 +64,7 @@
 						</label>
 						<label for="logPass" class="col-xs-12 margin-top">
 							<span>Enter your password</span>
-							<input type="password" id="logPass" ng-model="user.pass" class="form-control" placeholder="Enter your password" required>
+							<input type="password" id="logPass" ng-model="user.password" class="form-control" placeholder="Enter your password" required>
 						</label>
 						<div class="col-xs-12 margin-top" ng-show="loginError">
 							<p class="invalidPass">Login Fail! {{loginErrMsg}}</p>

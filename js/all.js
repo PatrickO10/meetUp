@@ -8,18 +8,18 @@
 (function(){
 	'use strict';
 
-	angular.module('app.dashboard', ['firebase', 'app.fbAuth']);
-})();
-(function(){
-	'use strict';
-
-	angular.module('app.login', ['firebase']);
-
+	angular.module('app.dashboard', ['firebase']);
 })();
 (function(){
 	'use strict';
 
 	angular.module('app.fbAuth', ['firebase']);
+
+})();
+(function(){
+	'use strict';
+
+	angular.module('app.login', ['firebase']);
 
 })();
 (function() {
@@ -63,9 +63,9 @@
 		.module('app.login')
 		.controller('LoginCtrl', LoginCtrl);
 
-	LoginCtrl.$inject = ['$scope', '$rootScope', 'loginUser', '$firebaseArray', 'authService'];
+	LoginCtrl.$inject = ['$scope', '$rootScope', 'authService'];
 
-	function LoginCtrl($scope, $rootScope, loginUser, $firebaseArray, authService) {
+	function LoginCtrl($scope, $rootScope, authService) {
 		var ref = new Firebase("https://vivid-torch-762.firebaseio.com/");
 		var self = this;
 		self.userRef = '';
