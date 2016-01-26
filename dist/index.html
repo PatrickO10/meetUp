@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="meetupEventApp">
+<html lang="en" ng-app="app">
 
 <head>
 	<meta charset="utf-8">
@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="css/main.css">
 </head>
 
-<body ng-controller="MeetupEventCtrl as ctrl">
+<body ng-controller="MainCtrl as ctrl">
 	<div class="container">
 		<header class="row">
 			<div class="col-xs-12 text-center">
@@ -45,7 +45,7 @@
 	</div>
 
 	<!-- Login modal -->
-	<div class="modal fade login" tabindex="-1" role="dialog" aria-labelledby="loginModelLabel">
+	<div class="modal fade login" tabindex="-1" role="dialog" aria-labelledby="loginModelLabel" ng-controller="LoginCtrl as logCtrl">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header scarlet-bg">
@@ -53,7 +53,7 @@
 					<h4 class="modal-title" id="loginModelLabel">Login</h4>
 				</div>
 				<div class="modal-body mane-bg">
-					<form class="row form-horizontal" id="loginForm" ng-submit="ctrl.login(user)" name="logForm">
+					<form class="row form-horizontal" id="loginForm" ng-submit="logCtrl.login(user)" name="logForm">
 						<label for="logEmail" class="col-xs-12 margin-top">
 							<span class="pad-right">Enter your email</span>
 							<input type="email" id="logEmail" ng-model="user.email" class="form-control" placeholder="example@krustykrab.com" required autocomplete="email" autofocus>
@@ -62,8 +62,8 @@
 							<span>Enter your password</span>
 							<input type="password" id="logPass" ng-model="user.pass" class="form-control" placeholder="Enter your password" required>
 						</label>
-						<div class="col-xs-12 margin-top" ng-show="ctrl.loginError">
-							<p class="invalidPass">Login Fail! {{ctrl.loginErrMsg}}</p>
+						<div class="col-xs-12 margin-top" ng-show="loginError">
+							<p class="invalidPass">Login Fail! {{loginErrMsg}}</p>
 						</div>
 						<label class="col-xs-12 margin-top">
 							<input id="submitLogin" type="submit" value="Login" ng-disabled="logForm.$invalid.$setValidity">
@@ -146,8 +146,10 @@
 			</div>
 			<!-- /.modal-content -->
 		</div>
-		<!-- /.modal-dialog -->
+
+		<!-- /.modal-dialog	-->
 	</div>
+
 	<!-- /.modal -->
 
 	<!-- Create New Event Modal -->
@@ -216,10 +218,13 @@
 					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 				</div>
 			</div>
+
 			<!-- /.modal-content -->
 		</div>
+
 		<!-- /.modal-dialog -->
 	</div>
+
 	<!-- /.modal -->
 
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js" defer></script>

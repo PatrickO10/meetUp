@@ -6,10 +6,17 @@ var gulp = require('gulp'),
 	concat = require('gulp-concat'),
 	uglify = require('gulp-uglify');
 
+// Source order for scripts.
+var jsOrder = [
+	'app/app.module.js',
+	'app/**/*.module.js',
+	'app/**/*.controller.js',
+	'app/**/*.js'
+];
 
 gulp.task('default', ['copy-html', 'styles', 'lint', 'scripts'], function() {
 	gulp.watch('sass/**/*.scss', ['styles']);
-	gulp.watch('js/**/*.js', ['lint', 'scripts-dist']);
+	gulp.watch('app/**/*.js', ['lint', 'scripts-dist']);
 	gulp.watch('index.html', ['copy-html']);
 	gulp.watch('./dist/index.html').on('change', browserSync.reload);
 	gulp.watch('./dist/css/main.css').on('change', browserSync.reload);
@@ -28,14 +35,14 @@ gulp.task('dist', [
 ]);
 
 gulp.task('scripts', function() {
-	gulp.src('js/**/*.js')
+	gulp.src(jsOrder)
 		.pipe(concat('all.js'))
-		.pipe(gulp.dest('dist/js'))
+		//.pipe(gulp.dest('dist/js'))
 		.pipe(gulp.dest('js'));
 });
 
 gulp.task('scripts-dist', function() {
-	gulp.src('js/**/*.js')
+	gulp.src(jsOrder)
 		.pipe(concat('all.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest('dist/js'));
@@ -70,7 +77,7 @@ gulp.task('lint', function() {
 	// So, it's best to have gulp ignore the directory as well.
 	// Also, Be sure to return the stream from the task;
 	// Otherwise, the task may end before the stream has finished.
-	return gulp.src(['js/**/*.js', '!node_modules/**'])
+	return gulp.src(['app/**/*.js', '!node_modules/**'])
 		// eslint() attaches the lint output to the "eslint" property
 		// of the file object so it can be used by other modules.
 		.pipe(eslint())
