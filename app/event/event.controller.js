@@ -10,9 +10,7 @@
 	function EventCtrl(authService) {
 		var self = this;
 		self.masterEvent = {};
-		self.userObj = authService.getUserAuth();
-		// Variable used for when pushing to the user's events.
-		self.userEventRef = authService.setEventRef(self.userObj.uid);
+
 
 		// Autocomplete variables
 		var input = document.getElementById('loc-input');
@@ -29,6 +27,9 @@
 
 		self.createEvent = function(eObj) {
 			self.masterEvent = angular.copy(eObj);
+			self.userObj = authService.getUserAuth();
+			// Variable used for when pushing to the user's events.
+			self.userEventRef = authService.setEventRef(self.userObj.uid);
 
 			// Pushes the new event to Firebase.
 			self.userEventRef.push({

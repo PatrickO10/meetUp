@@ -85,7 +85,7 @@
 	<!-- /.modal -->
 
 	<!-- Sign Up Modal -->
-	<div class="modal fade signUp" tabindex="-1" role="dialog" aria-labelledby="SignUpModelLabel">
+	<div class="modal fade signUp" tabindex="-1" role="dialog" aria-labelledby="SignUpModelLabel" ng-controller='RegisterCtrl as rCtrl'>
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header scarlet-bg">
@@ -94,35 +94,48 @@
 				</div>
 				<div class="modal-body mane-bg">
 					<div class="row">
-						<form class="col-xs-12" id="signUpForm" ng-submit="ctrl.signUp(newUser)" name="newAccount">
+						<form class="col-xs-12" id="signUpForm" ng-submit="rCtrl.signUp(newUser)" name="newAccount">
 							<label for="fname" class="col-xs-12">
 								<span>Enter your full name (First and Last name)</span>
-								<input type="text" id="fname" class="form-control" placeholder="full name" required autocomplete="name" ng-model="newUser.fname" autofocus>
+								<div class="input-error" ng-messages="newAccount.fullname.$error" role="alert" ng-if="newAccount.fullname.$touched">
+									<div ng-message="required">
+										<p>This field is required</p>
+									</div>
+								</div>
+								<input type="text" id="fname" name="fullname" class="form-control" placeholder="full name" required autocomplete="name" ng-model="newUser.fname" autofocus>
+
 							</label>
 							<label for="email" class="col-xs-12 margin-top">
 								<span class="pad-right">Enter your email</span>
-								<input type="email" id="email" class="form-control" placeholder="example@krustykrab.com" required autocomplete="email" ng-model="newUser.email" ng-blur="checkValidity()">
+								<div class="input-error" ng-messages="newAccount.email.$error">
+									<div ng-message="required">
+										<p>This field is required</p>
+									</div>
+									<div ng-message="email">
+										<p>Needs a correct email</p>
+									</div>
+								</div>
+								<input type="email" id="email" name="email" class="form-control" placeholder="example@krustykrab.com" required autocomplete="email" ng-model="newUser.email" ng-blur="checkValidity()">
+
 							</label>
-							<label for="fPassword" class="col-xs-12 col-md-6 margin-top">
+							<label for="fPassword" class="col-xs-12 margin-top">
 								<span>Create a password</span>
-								<input type="password" id="fPassword" class="form-control" placeholder="Enter your password" maxlength="50" minlength="8" required ng-model="newUser.fPassword">
-							</label>
-							<label for="sPassword" class="col-xs-12 col-md-6 margin-top">
-								<span>Type password again</span>
-								<input type="password" id="sPassword" class="form-control" placeholder="Repeat password" maxlength="50" minlength="8" required ng-model="newUser.sPassword">
-							</label>
-							<div class="col-xs-12">
-								<p>Password should meet the following requirements:</p>
-								<ul>
-									<li>8-50 characters (longer is better)</li>
-									<li>At least one of these symbols: !, @, #, $, %, ^, &, *</li>
-									<li>At least one number</li>
-									<li>At least one lowercase letter</li>
-									<li>At least one uppercase letter</li>
+								<ul class="input-error">
+									<li ng-hide="rCtrl.charLen">Password should be between 8-50 characters (longer is better)</li>
+									<li ng-hide="rCtrl.symbols">Password needs at least one of these symbols: !, @, #, $, %, ^, &, *</li>
+									<li ng-hide="rCtrl.missNumber">Password needs at least one number</li>
+									<li ng-hide="rCtrl.lowerCase">Password needs at least one lowercase letter</li>
+									<li ng-hide="rCtrl.upperCase">Password needs at least one uppercase letter</li>
 								</ul>
-							</div>
-							<span class="optional">(Optional Information) Gender, Birthday</span>
+								<input type="password" id="fPassword" name="fPwd" class="form-control" placeholder="Enter your password" maxlength="50" minlength="8" required ng-model="newUser.password" ng-keyup="rCtrl.checkPassword()">
+							</label>
+							<label for="sPassword" class="col-xs-12 margin-top ">
+								<p class="input-error" ng-hide="rCtrl.pwdsMatch">Passwords must match</p>
+								<span>Type password again</span>
+								<input type="password" id="sPassword" class="form-control" placeholder="Repeat password" maxlength="50" minlength="8" required ng-model="newUser.sPassword" ng-keyup="rCtrl.checkPassword()">
+							</label>
 							<div class="col-xs-12 margin-top">
+								<p class="optional">(Optional Information) Gender, Birthday</p>
 								<span>Select Gender</span>
 								<label for="male">
 									<input type="radio" id="male" name="male" ng-model="newUser.gender" value="male">Male
@@ -137,7 +150,9 @@
 									<input class="form-control" type="date" name="bday" ng-model="newUser.birthday" placeholder="yyyy-mm-dd">
 								</label>
 							</div>
-
+							<div class="col-xs-12 margin-top" ng-show="rCtrl.registerErr">
+								<p class="invalidPass">Registration Failed! {{rCtrl.registerErrMsg}}</p>
+							</div>
 							<label class="col-xs-12 margin-top">
 								<input id="submitSignUp" value="Sign Up" type="submit" ng-disabled="newAccount.$invalid.$setValidity">
 							</label>
@@ -231,6 +246,9 @@
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js" defer></script>
 	<!-- Angular -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js" defer></script>
+
+	<!-- load ngmessages -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js" defer></script>
 
 	<!-- Firebase -->
 	<script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js" defer></script>

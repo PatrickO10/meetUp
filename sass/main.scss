@@ -26,8 +26,23 @@ header {
 	background: $scarlet;
 }
 
+ul {
+	list-style-type: square;
+}
+
+span {
+	font-size: 1.3em;
+}
+
+.input-error {
+	padding: 0 0 0 2em;
+	background: #FF0000;
+	color: #fff;
+	font-size: 1.3em;
+}
+
 .optional {
-	background: #337AB7;
+	background: #008000;
 	color: #fff;
 	font-size: 1.3em;
 }

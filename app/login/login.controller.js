@@ -16,7 +16,7 @@
 
 		self.login = function(user) {
 			self.masterUser = angular.copy(user);
-			console.log(self.masterUser);
+
 			authService.loginWithPwd(self.masterUser).then(function(authData) {
 				$scope.loginError = false;
 				$scope.loginErrMsg = '';

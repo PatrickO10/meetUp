@@ -3,7 +3,7 @@
 
 	angular
 		.module('app.fbAuth')
-		.service('authService', authService);
+		.factory('authService', authService);
 
 	authService.$inject = ['$firebase', 'FBURL', '$q'];
 
@@ -20,8 +20,15 @@
 		};
 		return services;
 
-		function saveNewUser(userObj) {
-			ref.child('users').child(userObj.id).set(userObj);
+		function saveNewUser(authData, userObj) {
+			var setObj = {
+				email: userObj.email,
+				name: userObj.name,
+				gender: userObj.gender || '',
+				birthday: userObj.birthday || ''
+			};
+
+			ref.child('users').child(authData.uid).set(setObj);
 		}
 
 		function getUserAuth() {
@@ -36,20 +43,27 @@
 				} else {
 					defered.resolve(authData);
 				}
+				if (cb) {
+					cb(authData, userObj);
+				}
 			});
+
 			return defered.promise;
 		}
 
 		function createUser(user, cb) {
+			var deferedUser = $q.defer();
 			ref.createUser(user, function(error, authData) {
 				if (error) {
-					console.log("Yo, Error: ", error);
+					deferedUser.reject(error);
 				} else {
+					deferedUser.resolve(authData);
 					loginWithPwd(user, function(authData) {
-						saveNewUser(authData);
-					}, cb);
+						saveNewUser(authData, user);
+					});
 				}
 			});
+			return deferedUser.promise;
 		}
 
 		// Sets the user ref

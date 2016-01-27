@@ -41,6 +41,7 @@ HTML5, CSS3, Javascript, Sass, Gulp, Bootstrap, AngularJS, FireBase, AngularFire
 - [AngularFire Docs](https://www.firebase.com/docs/web/libraries/angular/api.html)
 - [Building High Conversion Web Forms](https://www.udacity.com/course/viewer#!/c-ud890-nd/l-5885538560)
 - [Web Tooling & Automation](https://www.udacity.com/course/viewer#!/c-ud890-nd/l-5885538560)
+- [ngMessages](https://scotch.io/tutorials/angularjs-form-validation-with-ngmessages)
 
 ### Autocomplete resources
 - https://developers.google.com/maps/documentation/javascript/places-autocomplete?utm_source=welovemapsdevelopers&utm_campaign=mdr-gdl

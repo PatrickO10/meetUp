@@ -17,7 +17,7 @@
 
 		authService.setOnAuth(authDataCallback);
 
-		// Callback sets user's events.
+		// Callback to set user's events.
 		function authDataCallback(authData) {
 			if (authData) {
 				console.log("User " + authData.uid + " is logged in with " + authData.provider);
@@ -28,6 +28,14 @@
 				console.log("User is logged out");
 			}
 		}
+
+		// Since autofocus doesn't work with bootstrap modals, I am using this code from Bootstrap JS to replace it
+		// for autofocus.
+		$('.signUp, .newEvent, .login').on('shown.bs.modal', function() {
+			$('#fname').focus();
+			$('#eName').focus();
+			$('#logEmail').focus();
+		});
 
 	}
 })();
