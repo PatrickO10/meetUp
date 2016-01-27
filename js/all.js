@@ -9,18 +9,12 @@
 (function(){
 	'use strict';
 
-	angular.module('app.event', []);
-})();
-(function(){
-	'use strict';
-
 	angular.module('app.dashboard', ['firebase']);
 })();
 (function(){
 	'use strict';
 
-	angular.module('app.fbAuth', ['firebase']);
-
+	angular.module('app.event', []);
 })();
 (function(){
 	'use strict';
@@ -31,60 +25,15 @@
 (function(){
 	'use strict';
 
-	angular
-		.module('app.register', []);
+	angular.module('app.fbAuth', ['firebase']);
+
 })();
-(function() {
+(function(){
 	'use strict';
 
 	angular
-		.module('app.event')
-		.controller('EventCtrl', EventCtrl);
-
-	EventCtrl.$inject = ['authService'];
-
-	function EventCtrl(authService) {
-		var self = this;
-		self.masterEvent = {};
-		self.userObj = authService.getUserAuth();
-		// Variable used for when pushing to the user's events.
-		self.userEventRef = authService.setEventRef(self.userObj.uid);
-
-		// Autocomplete variables
-		var input = document.getElementById('loc-input');
-		self.eventLoc = '';
-
-		// Create the autocomplete object
-		self.autocomplete = new google.maps.places.Autocomplete(input);
-
-		// Add listener so address changes and so it can be pushed to create event.
-		self.autocomplete.addListener('place_changed', function() {
-			var place = self.autocomplete.getPlace();
-			self.eventLoc = place.formatted_address;
-		});
-
-		self.createEvent = function(eObj) {
-			self.masterEvent = angular.copy(eObj);
-
-			// Pushes the new event to Firebase.
-			self.userEventRef.push({
-				name: self.masterEvent.name,
-				type: self.masterEvent.type,
-				host: self.masterEvent.host,
-				startDate: self.masterEvent.startDate.getTime(),
-				endDate: self.masterEvent.endDate.getTime(),
-				location: self.eventLoc,
-				guests: self.masterEvent.guests,
-				msg: self.masterEvent.msg || ''
-			});
-
-			eObj.msg = '';
-			$('#newEventForm')[0].reset();
-			$('.newEvent').modal('hide');
-		};
-	}
+		.module('app.register', []);
 })();
-
 (function() {
 	'use strict';
 
@@ -131,6 +80,58 @@
 	'use strict';
 
 	angular
+		.module('app.event')
+		.controller('EventCtrl', EventCtrl);
+
+	EventCtrl.$inject = ['authService'];
+
+	function EventCtrl(authService) {
+		var self = this;
+		self.masterEvent = {};
+
+
+		// Autocomplete variables
+		var input = document.getElementById('loc-input');
+		self.eventLoc = '';
+
+		// Create the autocomplete object
+		self.autocomplete = new google.maps.places.Autocomplete(input);
+
+		// Add listener so address changes and so it can be pushed to create event.
+		self.autocomplete.addListener('place_changed', function() {
+			var place = self.autocomplete.getPlace();
+			self.eventLoc = place.formatted_address;
+		});
+
+		self.createEvent = function(eObj) {
+			self.masterEvent = angular.copy(eObj);
+			self.userObj = authService.getUserAuth();
+			// Variable used for when pushing to the user's events.
+			self.userEventRef = authService.setEventRef(self.userObj.uid);
+
+			// Pushes the new event to Firebase.
+			self.userEventRef.push({
+				name: self.masterEvent.name,
+				type: self.masterEvent.type,
+				host: self.masterEvent.host,
+				startDate: self.masterEvent.startDate.getTime(),
+				endDate: self.masterEvent.endDate.getTime(),
+				location: self.eventLoc,
+				guests: self.masterEvent.guests,
+				msg: self.masterEvent.msg || ''
+			});
+
+			eObj.msg = '';
+			$('#newEventForm')[0].reset();
+			$('.newEvent').modal('hide');
+		};
+	}
+})();
+
+(function() {
+	'use strict';
+
+	angular
 		.module('app.login')
 		.controller('LoginCtrl', LoginCtrl);
 
@@ -145,7 +146,7 @@
 
 		self.login = function(user) {
 			self.masterUser = angular.copy(user);
-			console.log(self.masterUser);
+
 			authService.loginWithPwd(self.masterUser).then(function(authData) {
 				$scope.loginError = false;
 				$scope.loginErrMsg = '';
@@ -182,77 +183,96 @@
 		.module('app.register')
 		.controller('RegisterCtrl', RegisterCtrl);
 
-	RegisterCtrl.$inject = ['authService', '$scope'];
+	RegisterCtrl.$inject = ['authService'];
 
-	function RegisterCtrl(authService, $scope) {
+	function RegisterCtrl(authService) {
 		var self = this;
-		self.firstPwIssues = '';
-		self.secondPwIssues = '';
-		self.checkPass = {};
+
+		// Password Booleans to either display or hide instructions for ngHide.
 		self.charLen = false;
 		self.symbols = false;
+		self.missNumber = false;
+		self.lowerCase = false;
+		self.upperCase = false;
+		self.pwdsMatch = false;
+
+		// Boolean for create user error messages
+		self.registerErr = false;
+		self.registerErrMsg = '';
 
 
 		self.signUp = function(user) {
 			self.newUserObj = angular.copy(user);
-			authService.createUser(self.newUserObj);
 
-			$('#signUpForm')[0].reset();
-			$('.signUp').modal('hide');
+			self.userObject = {
+				email: self.newUserObj.email,
+				password: self.newUserObj.password,
+				name: self.newUserObj.fname,
+				gender: self.newUserObj.gender || '',
+				birthday: self.newUserObj.birthday.toLocaleDateString() || ''
+			};
+
+			authService.createUser(self.userObject).then(function(authData) {
+				self.registerErr = false;
+				self.registerErrMsg = '';
+
+				$('#signUpForm')[0].reset();
+				$('.signUp').modal('hide');
+			}, function(error) {
+				self.registerErr = true;
+				self.registerErrMsg += error;
+			});
 		};
 
 		self.checkPassword = function() {
-			var pwEl = angular.element(document.getElementById('fPassword'));
-			var pwInput = pwEl;
+			var pwEl = document.getElementById('fPassword');
+			var pwInput = pwEl.value;
 
-			var msg = '';
-			console.log(pwInput);
+			var secondPwEl = document.getElementById('sPassword');
+			var secondPwInput = secondPwEl.value;
+
+			// Character Lengths
 			if (pwInput.length >= 8 && pwInput.length <= 50) {
 				self.charLen = true;
-				msg += "fewer than 8 characters\n";
 			} else {
 				self.charLen = false;
 			}
-			if (!pwInput.match(/[\!\@\#\$\%\^\&\*]/g)) {
+
+			// Symbols
+			if (pwInput.match(/[\!\@\#\$\%\^\&\*]/g)) {
 				self.symbols = true;
-				msg += "missing a symbol (!, @, #, $, %, ^, &, *)";
 			} else {
 				self.symbols = false;
 			}
 
+			// Missing Number
+			if (pwInput.match(/\d/g)) {
+				self.missNumber = true;
+			} else {
+				self.missNumber = false;
+			}
+
+			// Check lowercase
+			if (pwInput.match(/[a-z]/g)) {
+				self.lowerCase = true;
+			} else {
+				self.lowerCase = false;
+			}
+
+			// Check uppercase
+			if (pwInput.match(/[A-Z]/g)) {
+				self.upperCase = true;
+			} else {
+				self.upperCase = false;
+			}
+
+			// Check if passwords match.
+			if (pwInput === secondPwInput) {
+				self.pwdsMatch = true;
+			} else {
+				self.pwdsMatch = false;
+			}
 		};
-		/*
-				function checkPasswords(userObj) {
-					if (self.masterUser.fPassword.length < 8) {
-						firstPasswordInputIssuesTracker.addIssues("fewer than 8 characters");
-					} else if (self.masterUser.fPassword.length > 50) {
-						firstPasswordInputIssuesTracker.addIssues("greater than 50 characters");
-					}
-
-					if (!self.masterUser.fPassword.match(/[\!\@\#\$\%\^\&\*]/g)) {
-						firstPasswordInputIssuesTracker.addIssues("missing a symbol (!, @, #, $, %, ^, &, *)");
-					}
-
-					if (!self.masterUser.fPassword.match(/\d/g)) {
-						firstPasswordInputIssuesTracker.addIssues("missing a number");
-					}
-
-					if (!self.masterUser.fPassword.match(/[a-z]/g)) {
-						firstPasswordInputIssuesTracker.addIssues("missing a lowercase letter");
-					}
-
-					if (!self.masterUser.fPassword.match(/[A-Z]/g)) {
-						firstPasswordInputIssuesTracker.addIssues("missing an uppercase letter");
-					}
-
-					var badCharacterGroup = self.masterUser.fPassword.match(/[^A-z0-9\!\@\#\$\%\^\&\*]/g);
-					if (badCharacterGroup) {
-						badCharacterGroup.forEach(function(badChar) {
-							firstPasswordInputIssuesTracker.addIssues("includes bad character: " + badChar);
-						});
-					}
-				}
-		*/
 	}
 })();
 
@@ -278,8 +298,15 @@
 		};
 		return services;
 
-		function saveNewUser(userObj) {
-			ref.child('users').child(userObj.id).set(userObj);
+		function saveNewUser(authData, userObj) {
+			var setObj = {
+				email: userObj.email,
+				name: userObj.name,
+				gender: userObj.gender || '',
+				birthday: userObj.birthday || ''
+			};
+
+			ref.child('users').child(authData.uid).set(setObj);
 		}
 
 		function getUserAuth() {
@@ -294,20 +321,27 @@
 				} else {
 					defered.resolve(authData);
 				}
+				if (cb) {
+					cb(authData, userObj);
+				}
 			});
+
 			return defered.promise;
 		}
 
 		function createUser(user, cb) {
+			var deferedUser = $q.defer();
 			ref.createUser(user, function(error, authData) {
 				if (error) {
-					console.log("Yo, Error: ", error);
+					deferedUser.reject(error);
 				} else {
+					deferedUser.resolve(authData);
 					loginWithPwd(user, function(authData) {
-						saveNewUser(authData);
+						saveNewUser(authData, user);
 					});
 				}
 			});
+			return deferedUser.promise;
 		}
 
 		// Sets the user ref
@@ -326,29 +360,4 @@
 
 	}
 
-})();
-
-(function() {
-	'use strict';
-
-	angular
-		.module('app.register')
-		.factory('issuesTracker', issuesTracker);
-
-	function issuesTracker() {
-		var services = {
-			retrieveIssues: retrieveIssues
-		};
-		return services;
-
-		function retrieveIssues(issues) {
-			var msg = "";
-			if (issues.length === 1) {
-				msg = "The following issue needs to be corrected:\n" + issues[0];
-			} else if (issues.length > 1) {
-				msg = "The following issues need to be corrected:\n" + issues.join("\n");
-			}
-			return msg;
-		}
-	}
 })();
