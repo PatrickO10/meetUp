@@ -4,6 +4,39 @@ $mane: #E4552E;
 $parchment: #F0E9D5;
 $midnight: #262020;
 $maroon: #800000;
+
+/*
+ * Break Points
+ */
+
+@mixin breakpoint($point) {
+	@if $point==desktop {
+		@media (min-width: 70em) {
+			@content ;
+		}
+	}
+	@else if $point==laptop {
+		@media (min-width: 64em) {
+			@content ;
+		}
+	}
+	@else if $point==tablet {
+		@media (min-width: 50em) {
+			@content ;
+		}
+	}
+	@else if $point==phablet {
+		@media (min-width: 37.5em) {
+			@content ;
+		}
+	}
+	@else if $point==mobileonly {
+		@media (max-width: 37.5em) {
+			@content ;
+		}
+	}
+}
+
 html,
 body {
 	margin: 0;
@@ -121,11 +154,14 @@ h1 {
 }
 
 .eventCard {
-	margin: 10px 10px 0 0;
-	max-width: calc((100% - 30px)/ 3);
 	border: solid 5px $parchment;
+	margin: 10px 10px 0 0;
 	color: $midnight;
 	background: $gold;
+	max-width: calc((100% - 30px)/ 3);
+	@include breakpoint(mobileonly) {
+		max-width: 100%;
+	}
 }
 
 .invalidPass {
