@@ -5,6 +5,7 @@ var gulp = require('gulp'),
 	eslint = require('gulp-eslint'),
 	concat = require('gulp-concat'),
 	uglify = require('gulp-uglify');
+	rename = require('gulp-rename');
 
 // Source order for scripts.
 var jsOrder = [
@@ -37,16 +38,25 @@ gulp.task('dist', [
 gulp.task('scripts', function() {
 	gulp.src(jsOrder)
 		.pipe(concat('all.js'))
-		//.pipe(gulp.dest('dist/js'))
+		.pipe(gulp.dest('js'))
+		.pipe(rename({
+			suffix: '.min'
+		}))
+		.pipe(uglify())
 		.pipe(gulp.dest('js'));
 });
 
 gulp.task('scripts-dist', function() {
 	gulp.src(jsOrder)
 		.pipe(concat('all.js'))
+		.pipe(gulp.dest('dist/js'))
+		.pipe(rename({
+			suffix: '.min'
+		}))
 		.pipe(uglify())
 		.pipe(gulp.dest('dist/js'));
 });
+
 
 gulp.task('copy-html', function() {
 	gulp.src('./index.html')
