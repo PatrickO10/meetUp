@@ -18,12 +18,9 @@
 			</div>
 			<div class="col-xs-12">
 				<div class="row ">
-					<div class="col-xs-4 btn-group" ng-hide="ctrl.loggedStatus">
+					<div class="col-xs-6 btn-group" ng-hide="ctrl.loggedStatus">
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".signUp">Sign Up</button>
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".login">Login</button>
-					</div>
-					<div class="col-xs-4" ng-hide="ctrl.loggedStatus">
-
 					</div>
 					<div class="col-xs-6" ng-show="ctrl.loggedStatus">
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".newEvent">Create Event</button>
@@ -94,19 +91,19 @@
 				</div>
 				<div class="modal-body mane-bg">
 					<div class="row">
-						<form class="col-xs-12" id="signUpForm" ng-submit="rCtrl.signUp(newUser)" name="newAccount">
+						<form class="col-xs-12" id="signUpForm" ng-submit="rCtrl.signUp(newUser)" name="newAccount" novalidate>
 							<label for="fname" class="col-xs-12">
 								<span>Enter your full name (First and Last name)</span>
+								<input type="text" id="fname" name="fullname" class="form-control" placeholder="full name" required autocomplete="name" ng-model="newUser.fname" autofocus>
 								<div class="input-error" ng-messages="newAccount.fullname.$error" role="alert" ng-if="newAccount.fullname.$touched">
 									<div ng-message="required">
 										<p>This field is required</p>
 									</div>
 								</div>
-								<input type="text" id="fname" name="fullname" class="form-control" placeholder="full name" required autocomplete="name" ng-model="newUser.fname" autofocus>
-
 							</label>
 							<label for="email" class="col-xs-12 margin-top">
 								<span class="pad-right">Enter your email</span>
+								<input type="email" id="email" name="email" class="form-control" placeholder="example@krustykrab.com" required autocomplete="email" ng-model="newUser.email" ng-blur="checkValidity()">
 								<div class="input-error" ng-messages="newAccount.email.$error">
 									<div ng-message="required">
 										<p>This field is required</p>
@@ -115,11 +112,10 @@
 										<p>Needs a correct email</p>
 									</div>
 								</div>
-								<input type="email" id="email" name="email" class="form-control" placeholder="example@krustykrab.com" required autocomplete="email" ng-model="newUser.email" ng-blur="checkValidity()">
-
 							</label>
 							<label for="fPassword" class="col-xs-12 margin-top">
 								<span>Create a password</span>
+								<input type="password" id="fPassword" name="fPwd" class="form-control" placeholder="Enter your password" maxlength="50" minlength="8" required ng-model="newUser.password" ng-keyup="rCtrl.checkPassword()">
 								<ul class="input-error">
 									<li ng-hide="rCtrl.charLen">Password should be between 8-50 characters (longer is better)</li>
 									<li ng-hide="rCtrl.symbols">Password needs at least one of these symbols: !, @, #, $, %, ^, &, *</li>
@@ -127,12 +123,11 @@
 									<li ng-hide="rCtrl.lowerCase">Password needs at least one lowercase letter</li>
 									<li ng-hide="rCtrl.upperCase">Password needs at least one uppercase letter</li>
 								</ul>
-								<input type="password" id="fPassword" name="fPwd" class="form-control" placeholder="Enter your password" maxlength="50" minlength="8" required ng-model="newUser.password" ng-keyup="rCtrl.checkPassword()">
 							</label>
 							<label for="sPassword" class="col-xs-12 margin-top ">
-								<p class="input-error" ng-hide="rCtrl.pwdsMatch">Passwords must match</p>
 								<span>Type password again</span>
 								<input type="password" id="sPassword" class="form-control" placeholder="Repeat password" maxlength="50" minlength="8" required ng-model="newUser.sPassword" ng-keyup="rCtrl.checkPassword()">
+								<p class="input-error" ng-hide="rCtrl.pwdsMatch">Passwords must match</p>
 							</label>
 							<div class="col-xs-12 margin-top">
 								<p class="optional">(Optional Information) Gender, Birthday</p>
@@ -154,7 +149,7 @@
 								<p class="invalidPass">Registration Failed! {{rCtrl.registerErrMsg}}</p>
 							</div>
 							<label class="col-xs-12 margin-top">
-								<input id="submitSignUp" value="Sign Up" type="submit" ng-disabled="newAccount.$invalid.$setValidity">
+								<input id="submitSignUp" value="Sign Up" type="submit" ng-disabled="newAccount.$invalid">
 							</label>
 						</form>
 					</div>

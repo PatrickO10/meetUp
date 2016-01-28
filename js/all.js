@@ -19,13 +19,13 @@
 (function(){
 	'use strict';
 
-	angular.module('app.login', ['firebase']);
+	angular.module('app.fbAuth', ['firebase']);
 
 })();
 (function(){
 	'use strict';
 
-	angular.module('app.fbAuth', ['firebase']);
+	angular.module('app.login', ['firebase']);
 
 })();
 (function(){
@@ -188,6 +188,7 @@
 	function RegisterCtrl(authService) {
 		var self = this;
 
+
 		// Password Booleans to either display or hide instructions for ngHide.
 		self.charLen = false;
 		self.symbols = false;
@@ -196,6 +197,7 @@
 		self.upperCase = false;
 		self.pwdsMatch = false;
 
+
 		// Boolean for create user error messages
 		self.registerErr = false;
 		self.registerErrMsg = '';
@@ -203,18 +205,41 @@
 
 		self.signUp = function(user) {
 			self.newUserObj = angular.copy(user);
+			var bday = '',
+				gender = '';
+
+			if (self.newUserObj.birthday) {
+				bday = self.newUserObj.birthday.toLocaleDateString();
+			}
+
+			if (self.newUserObj.gender) {
+				gender = self.newUserObj.gender;
+			}
 
 			self.userObject = {
 				email: self.newUserObj.email,
 				password: self.newUserObj.password,
 				name: self.newUserObj.fname,
-				gender: self.newUserObj.gender || '',
-				birthday: self.newUserObj.birthday.toLocaleDateString() || ''
+				gender: gender,
+				birthday: bday
 			};
 
 			authService.createUser(self.userObject).then(function(authData) {
 				self.registerErr = false;
 				self.registerErrMsg = '';
+
+				// Password Booleans set to false.
+				self.charLen = false;
+				self.symbols = false;
+				self.missNumber = false;
+				self.lowerCase = false;
+				self.upperCase = false;
+				self.pwdsMatch = false;
+
+				// Resets the object to empty strings.
+				for (var item in user) {
+					user[item] = '';
+				}
 
 				$('#signUpForm')[0].reset();
 				$('.signUp').modal('hide');
