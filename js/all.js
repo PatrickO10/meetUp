@@ -25,14 +25,14 @@
 (function(){
 	'use strict';
 
-	angular
-		.module('app.register', []);
+	angular.module('app.login', ['firebase']);
+
 })();
 (function(){
 	'use strict';
 
-	angular.module('app.login', ['firebase']);
-
+	angular
+		.module('app.register', []);
 })();
 (function() {
 	'use strict';
@@ -45,10 +45,15 @@
 
 	function MainCtrl(authService, $firebaseArray) {
 		var self = this;
+		self.eventsRef = '';
 
 		self.logOut = function() {
 			authService.logOutUser();
 			self.loggedStatus = false;
+		};
+
+		self.removeEvent = function(eid) {
+			authService.removeEvent(eid, self.eventsRef);
 		};
 
 		authService.setOnAuth(authDataCallback);
@@ -56,9 +61,9 @@
 		// Callback to set user's events.
 		function authDataCallback(authData) {
 			if (authData) {
-				console.log("User " + authData.uid + " is logged in with " + authData.provider);
-				var userRef = authService.setEventRef(authData.uid);
-				self.eventsArray = $firebaseArray(userRef);
+				console.log("User is logged in with " + authData.provider);
+				self.eventsRef = authService.setEventRef(authData.uid);
+				self.eventsArray = $firebaseArray(self.eventsRef);
 				self.loggedStatus = true;
 			} else {
 				console.log("User is logged out");
@@ -125,6 +130,54 @@
 			$('#newEventForm')[0].reset();
 			$('.newEvent').modal('hide');
 		};
+	}
+})();
+
+(function() {
+	'use strict';
+
+	angular
+		.module('app.login')
+		.controller('LoginCtrl', LoginCtrl);
+
+	LoginCtrl.$inject = ['$scope', '$rootScope', 'authService'];
+
+	function LoginCtrl($scope, $rootScope, authService) {
+		var self = this;
+		self.masterUser = {};
+		$scope.loginError = false;
+		$scope.loginErrMsg = '';
+
+
+		self.login = function(user) {
+			self.masterUser = angular.copy(user);
+
+			authService.loginWithPwd(self.masterUser).then(function(authData) {
+				$scope.loginError = false;
+				$scope.loginErrMsg = '';
+				$('#loginForm')[0].reset();
+				$('.login').modal('hide');
+			}, function(error) {
+				$scope.loginError = true;
+				switch (error.code) {
+					case "EMAIL_TAKEN":
+						$scope.loginErrMsg = "Error: The specified email is taken";
+						break;
+					case "INVALID_EMAIL":
+						$scope.loginErrMsg = "Error: The email you entered is invalid";
+						break;
+					case "INVALID_PASSWORD":
+						$scope.loginErrMsg = "Error: The specified password is incorrect.";
+						break;
+					case "INVALID_USER":
+						$scope.loginErrMsg = "Error: The specified user does not exist.";
+						break;
+					default:
+						$scope.loginErrMsg = "Error: " + error.code;
+				}
+			});
+		};
+
 	}
 })();
 
@@ -257,54 +310,6 @@
 	'use strict';
 
 	angular
-		.module('app.login')
-		.controller('LoginCtrl', LoginCtrl);
-
-	LoginCtrl.$inject = ['$scope', '$rootScope', 'authService'];
-
-	function LoginCtrl($scope, $rootScope, authService) {
-		var self = this;
-		self.masterUser = {};
-		$scope.loginError = false;
-		$scope.loginErrMsg = '';
-
-
-		self.login = function(user) {
-			self.masterUser = angular.copy(user);
-
-			authService.loginWithPwd(self.masterUser).then(function(authData) {
-				$scope.loginError = false;
-				$scope.loginErrMsg = '';
-				$('#loginForm')[0].reset();
-				$('.login').modal('hide');
-			}, function(error) {
-				$scope.loginError = true;
-				switch (error.code) {
-					case "EMAIL_TAKEN":
-						$scope.loginErrMsg = "Error: The specified email is taken";
-						break;
-					case "INVALID_EMAIL":
-						$scope.loginErrMsg = "Error: The email you entered is invalid";
-						break;
-					case "INVALID_PASSWORD":
-						$scope.loginErrMsg = "Error: The specified password is incorrect.";
-						break;
-					case "INVALID_USER":
-						$scope.loginErrMsg = "Error: The specified user does not exist.";
-						break;
-					default:
-						$scope.loginErrMsg = "Error: " + error.code;
-				}
-			});
-		};
-
-	}
-})();
-
-(function() {
-	'use strict';
-
-	angular
 		.module('app.fbAuth')
 		.factory('authService', authService);
 
@@ -319,7 +324,8 @@
 			loginWithPwd: loginWithPwd,
 			setEventRef: setEventRef,
 			setOnAuth: setOnAuth,
-			logOutUser: logOutUser
+			logOutUser: logOutUser,
+			removeEvent: removeEvent
 		};
 		return services;
 
@@ -373,6 +379,11 @@
 		function setEventRef(userId) {
 			var userRef = ref.child("users").child(userId).child("events");
 			return userRef;
+		}
+
+		function removeEvent(eid, eventsId) {
+			var eventRef = eventsId.child(eid);
+			eventRef.remove();
 		}
 
 		function setOnAuth(authDataCallback) {
