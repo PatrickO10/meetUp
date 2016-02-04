@@ -34,6 +34,7 @@
 
 		<section class="row text-center events-section ng-cloak">
 			<article class="col-xs-12 col-md-4 eventCard" ng-repeat="eventObject in ctrl.eventsArray">
+				<button type="button" class="pull-right" ng-click="ctrl.removeEvent(eventObject.$id)"><span>&times;</span></button>
 				<h3>{{eventObject.name}}</h3>
 				<h4>{{eventObject.eType}}</h4>
 				<p><strong>Host:</strong> {{eventObject.host}}</p>
@@ -42,6 +43,7 @@
 				<p><strong>Location:</strong> {{eventObject.location}}</p>
 				<p><strong>Guests:</strong> {{eventObject.guests}}</p>
 				<p ng-show="eventObject.msg"><strong>Message:</strong> {{eventObject.msg}}</p>
+
 			</article>
 		</section>
 	</div>

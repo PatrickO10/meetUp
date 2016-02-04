@@ -9,10 +9,15 @@
 
 	function MainCtrl(authService, $firebaseArray) {
 		var self = this;
+		self.eventsRef = '';
 
 		self.logOut = function() {
 			authService.logOutUser();
 			self.loggedStatus = false;
+		};
+
+		self.removeEvent = function(eid) {
+			authService.removeEvent(eid, self.eventsRef);
 		};
 
 		authService.setOnAuth(authDataCallback);
@@ -20,9 +25,9 @@
 		// Callback to set user's events.
 		function authDataCallback(authData) {
 			if (authData) {
-				console.log("User " + authData.uid + " is logged in with " + authData.provider);
-				var userRef = authService.setEventRef(authData.uid);
-				self.eventsArray = $firebaseArray(userRef);
+				console.log("User is logged in with " + authData.provider);
+				self.eventsRef = authService.setEventRef(authData.uid);
+				self.eventsArray = $firebaseArray(self.eventsRef);
 				self.loggedStatus = true;
 			} else {
 				console.log("User is logged out");

@@ -16,7 +16,8 @@
 			loginWithPwd: loginWithPwd,
 			setEventRef: setEventRef,
 			setOnAuth: setOnAuth,
-			logOutUser: logOutUser
+			logOutUser: logOutUser,
+			removeEvent: removeEvent
 		};
 		return services;
 
@@ -70,6 +71,11 @@
 		function setEventRef(userId) {
 			var userRef = ref.child("users").child(userId).child("events");
 			return userRef;
+		}
+
+		function removeEvent(eid, eventsId) {
+			var eventRef = eventsId.child(eid);
+			eventRef.remove();
 		}
 
 		function setOnAuth(authDataCallback) {
