@@ -72,6 +72,12 @@ span {
 	font-size: 1.3em;
 }
 
+.modal-dialog {
+	@include breakpoint(tablet) {
+		width: 1200px;
+	}
+}
+
 input {
 	color: $secondary-text-color;
 	background: $primary-color-light;
@@ -105,7 +111,7 @@ input {
 }
 
 .btn-group {
-	margin: 0 0 1em 0;
+	margin: 1em;
 }
 
 .btn-primary {
