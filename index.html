@@ -10,27 +10,28 @@
 </head>
 
 <body ng-controller="MainCtrl as ctrl">
-	<div class="container">
+	<div class="container-flex">
 		<header class="row">
 			<div class="col-xs-12 text-center">
 				<h1>Meet-Up Event Planner</h1>
 				<h4>By Patrick</h4>
 			</div>
-			<div class="col-xs-12">
-				<div class="row ">
-					<div class="col-xs-6 btn-group" ng-hide="ctrl.loggedStatus">
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".signUp">Sign Up</button>
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".login">Login</button>
-					</div>
-					<div class="col-xs-6" ng-show="ctrl.loggedStatus">
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".newEvent">Create Event</button>
-					</div>
-					<div class="col-xs-6" ng-show="ctrl.loggedStatus">
-						<button type="button" class="btn btn-primary pull-right" ng-click="ctrl.logOut()">Sign Out</button>
-					</div>
-				</div>
-			</div>
 		</header>
+
+		<div class="row ">
+			<div class="col-xs-6 btn-group" ng-hide="ctrl.loggedStatus">
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".signUp">Sign Up</button>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".login">Login</button>
+			</div>
+			<div class="col-xs-6" ng-show="ctrl.loggedStatus">
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".newEvent">Create Event</button>
+			</div>
+			<div class="col-xs-6" ng-show="ctrl.loggedStatus">
+				<button type="button" class="btn btn-primary pull-right" ng-click="ctrl.logOut()">Sign Out</button>
+			</div>
+		</div>
+
+
 		<section class="row text-center events-section ng-cloak">
 			<article class="col-xs-12 col-md-4 eventCard" ng-repeat="eventObject in ctrl.eventsArray">
 				<h3>{{eventObject.name}}</h3>
@@ -49,11 +50,11 @@
 	<div class="modal fade login" tabindex="-1" role="dialog" aria-labelledby="loginModelLabel" ng-controller="LoginCtrl as logCtrl">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<div class="modal-header scarlet-bg">
+				<div class="modal-header primary-bg">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title" id="loginModelLabel">Login</h4>
 				</div>
-				<div class="modal-body mane-bg">
+				<div class="modal-body primary-bg">
 					<form class="row form-horizontal" id="loginForm" ng-submit="logCtrl.login(user)" name="logForm">
 						<label for="logEmail" class="col-xs-12 margin-top">
 							<span class="pad-right">Enter your email</span>
@@ -71,7 +72,7 @@
 						</label>
 					</form>
 				</div>
-				<div class="modal-footer midnight-bg">
+				<div class="modal-footer primary-color-dark-bg">
 					<button type="submit" class="btn btn-primary" data-dismiss="modal">Close</button>
 				</div>
 			</div>
@@ -85,11 +86,11 @@
 	<div class="modal fade signUp" tabindex="-1" role="dialog" aria-labelledby="SignUpModelLabel" ng-controller='RegisterCtrl as rCtrl'>
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<div class="modal-header scarlet-bg">
+				<div class="modal-header primary-color-dark-bg">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title" id="SignUpModelLabel">Sign Up</h4>
 				</div>
-				<div class="modal-body mane-bg">
+				<div class="modal-body primary-bg">
 					<div class="row">
 						<form class="col-xs-12" id="signUpForm" ng-submit="rCtrl.signUp(newUser)" name="newAccount" novalidate>
 							<label for="fname" class="col-xs-12">
@@ -154,7 +155,7 @@
 						</form>
 					</div>
 				</div>
-				<div class="modal-footer midnight-bg">
+				<div class="modal-footer primary-color-dark-bg">
 					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 				</div>
 			</div>
@@ -174,7 +175,7 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title" id="newEventModelLabel">Create a New Event</h4>
 				</div>
-				<div class="modal-body mane-bg">
+				<div class="modal-body primary-bg">
 					<div class="row">
 						<form class="col-xs-12" id="newEventForm" ng-submit="eCtrl.createEvent(newEvent)">
 							<label for="eName" class="col-xs-12 margin-top">
@@ -225,7 +226,7 @@
 						</form>
 					</div>
 				</div>
-				<div class="modal-footer midnight-bg">
+				<div class="modal-footer primary-color-dark-bg">
 					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 				</div>
 			</div>
