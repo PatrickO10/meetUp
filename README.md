@@ -11,18 +11,23 @@ The objective of this project is to build awesome and easy to use forms.
 4. Google's autocomplete places
 
 ## How to get started
+
+### Required Software
+* [Git](https://git-scm.com/)
+* [Node/NPM](https://nodejs.org/en/)
+* [gulp](http://gulpjs.com/)
+
 ###Easy way!
 1. go to [http://patricko10.github.io/meetUp/](http://patricko10.github.io/meetUp/)
 
-## OR
+#### OR
 
 ### Installation
 1. Clone the [meetUp repository](https://github.com/PatrickO10/meetUp.git)
-2. cd to the meetUp directory:
-	`cd meetUp`
-3. Make sure you have [node](https://docs.npmjs.com/getting-started/installing-node), [npm](https://www.npmjs.com/) and [gulp](http://gulpjs.com/) setup.
-4. Run `npm install` in command line to get the required dependencies
-5. Once you have that you can simply type `gulp` in the command line and it will launch a local hosted page.
+2. `cd` to the newly cloned project:
+	Example: `cd meetUp`
+3. Run `npm install` in command line to get the required dependencies
+4. Once you have that you can simply type `gulp` in the command line and it will launch a locally hosted page.
 
 
 ## What to do when everything is up and running!
