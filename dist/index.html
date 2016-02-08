@@ -181,11 +181,11 @@
 				</div>
 				<div class="modal-body primary-bg">
 					<form class="row" id="newEventForm" ng-submit="eCtrl.createEvent(newEvent)">
-						<label for="eName" class="col-xs-12 col-md-6">
+						<label for="eName" class="col-xs-12 col-md-4">
 							<span>Enter Event Name</span>
 							<input type="text" id="eName" class="form-control" placeholder="Ex.: Patrick's Birthday" required ng-model="newEvent.name" autofocus>
 						</label>
-						<label for="events" class="col-xs-12 col-md-6">
+						<label for="events" class="col-xs-12 col-md-4">
 							<span>Choose an Event</span>
 							<input list="eventsList" id="events" class="form-control" placeholder="conference, movie, etc" required ng-model="newEvent.type">
 							<datalist id="eventsList">
@@ -199,7 +199,7 @@
 								<option value="Movie"></option>
 							</datalist>
 						</label>
-						<label for="host" class="col-xs-12 col-md-6">
+						<label for="host" class="col-xs-12 col-md-4">
 							<span>Enter Event Host</span>
 							<input id="host" type="text" class="form-control" placeholder="Event Host" required ng-model="newEvent.host">
 						</label>
