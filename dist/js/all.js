@@ -261,47 +261,23 @@
 			var secondPwEl = document.getElementById('sPassword');
 			var secondPwInput = secondPwEl.value;
 
-			// Character Lengths
-			if (pwInput.length >= 8 && pwInput.length <= 50) {
-				self.charLen = true;
-			} else {
-				self.charLen = false;
-			}
+			// Check for Character Lengths
+			self.charLen = /^[A-Za-z0-9\!\@\#\$\%\^\&\*]{8,50}/.test(pwInput);
 
-			// Symbols
-			if (pwInput.match(/[\!\@\#\$\%\^\&\*]/g)) {
-				self.symbols = true;
-			} else {
-				self.symbols = false;
-			}
+			// Check for Symbols
+			self.symbols = /[\!\@\#\$\%\^\&\*]/g.test(pwInput);
 
-			// Missing Number
-			if (pwInput.match(/\d/g)) {
-				self.missNumber = true;
-			} else {
-				self.missNumber = false;
-			}
+			// Check for Number
+			self.missNumber = /\d/g.test(pwInput);
 
-			// Check lowercase
-			if (pwInput.match(/[a-z]/g)) {
-				self.lowerCase = true;
-			} else {
-				self.lowerCase = false;
-			}
+			// Check for Lowercase Letter
+			self.lowerCase = /[a-z]/g.test(pwInput);
 
-			// Check uppercase
-			if (pwInput.match(/[A-Z]/g)) {
-				self.upperCase = true;
-			} else {
-				self.upperCase = false;
-			}
+			// Check for Uppercase Letter
+			self.upperCase = /[A-Z]/g.test(pwInput);
 
 			// Check if passwords match.
-			if (pwInput === secondPwInput) {
-				self.pwdsMatch = true;
-			} else {
-				self.pwdsMatch = false;
-			}
+			self.pwdsMatch = (pwInput === secondPwInput) ? true : false;
 		};
 	}
 })();
