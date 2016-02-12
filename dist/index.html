@@ -220,8 +220,8 @@
 							<input id="guest" class="pad-right form-control" type="text" placeholder="Enter guest names (Sam, Tom, Pam, etc.)" ng-model="newEvent.guests" required>
 						</label>
 						<label for="msg" class="col-xs-12 col-md-6">
-							<p><span class="optional">(Optional)</span> Add a message for guests</p>
-							<textarea class="form-control" ng-model="newEvent.msg"></textarea>
+							<p><span class="optional">(Optional)</span> Add a message for guests [140 characters only]</p>
+							<textarea class="form-control" ng-model="newEvent.msg" rows="3" cols="50" maxlength="140"></textarea>
 						</label>
 						<label for="eventSubmit" class="col-xs-12 col-md-6">
 							<input id="eventSubmit" type="submit" value="Create Event" ng-disabled="eSub.$invalid.$setValidity">
